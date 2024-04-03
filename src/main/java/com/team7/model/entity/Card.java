@@ -32,7 +32,7 @@ public class Card {
 
     @ManyToOne
     @JoinColumn(name = "vendor", referencedColumnName = "card_vendor_uid", nullable = false)
-    private CardVendor vendor;
+    private CardVendor cardVendor;
 
     @ManyToOne
     @JoinColumn(name = "mbti", referencedColumnName = "mbti_uid", nullable = false)

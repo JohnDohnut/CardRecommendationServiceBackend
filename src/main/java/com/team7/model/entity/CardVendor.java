@@ -1,7 +1,12 @@
 package com.team7.model.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+
+@Getter
+@Setter
 @Entity
 @Table(name = "card_vendor")
 public class CardVendor {
