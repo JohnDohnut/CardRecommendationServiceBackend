@@ -20,12 +20,10 @@ public class CustomerMbti {
     private CustomerMbtiId id = new CustomerMbtiId();
 
     @ManyToOne
-    @MapsId("customerId")
     @JoinColumn(name = "customer_uid")
     private Customer customer;
 
     @ManyToOne
-    @MapsId("mbtiId")
     @JoinColumn(name = "mbti_uid")
     private Mbti mbti;
 

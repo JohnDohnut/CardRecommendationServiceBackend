@@ -17,7 +17,7 @@ public class CustomerAccount {
 
     @Id
     @Column(name = "customer_uid")
-    private Long customerId;
+    private Long customerUid;
 
     @Column(name = "id", length = 20, nullable = false)
     private String id;

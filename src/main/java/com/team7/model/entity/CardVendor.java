@@ -9,7 +9,7 @@ public class CardVendor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "card_vendor_uid")
-    private Long id;
+    private Long vendorUid;
 
     @Column(name = "name", length = 30, nullable = false)
     private String name;
