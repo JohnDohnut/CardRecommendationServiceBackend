@@ -33,5 +33,15 @@ public class Customer {
     @Column(name = "birth")
     private Date birth;
 
+    @Column(name = "account_id")
+    private String accountId;
+
+    @Column(name = "account_password")
+    private String accountPassword;
+
+    @ManyToOne
+    @JoinColumn(name = "mbti_uid")
+    private Mbti mbti;
+
     // 생성자, getter, setter...
 }

@@ -1,6 +1,6 @@
 package com.team7.model.relationship;
 
-import com.team7.model.complex.CardBenefitId;
+import com.team7.model.complex.CardBenefitUid;
 import com.team7.model.entity.Benefit;
 import com.team7.model.entity.Card;
 import jakarta.persistence.*;
@@ -17,15 +17,15 @@ import lombok.Setter;
 public class CardBenefit {
 
     @EmbeddedId
-    private CardBenefitId id = new CardBenefitId();
+    private CardBenefitUid id = new CardBenefitUid();
 
     @ManyToOne
-    @MapsId("cardId")
+    @MapsId("cardUid")
     @JoinColumn(name = "card_uid")
     private Card card;
 
     @ManyToOne
-    @MapsId("benefitId")
+    @MapsId("benefitUid")
     @JoinColumn(name = "benefit_uid")
     private Benefit benefit;
 

@@ -12,10 +12,10 @@ import java.util.Objects;
 @Setter
 @RequiredArgsConstructor
 @Embeddable
-public class CustomerMbtiId implements Serializable {
+public class CardBenefitUid implements Serializable {
 
-    private Long customerId;
-    private Long MbtiId;
+    private Long cardUid;
+    private Long benefitUid;
 
     // 생성자, getter, setter...
 
@@ -24,13 +24,13 @@ public class CustomerMbtiId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CustomerMbtiId that = (CustomerMbtiId) o;
-        return Objects.equals(customerId, that.customerId) &&
-                Objects.equals(MbtiId, that.MbtiId);
+        CardBenefitUid that = (CardBenefitUid) o;
+        return Objects.equals(cardUid, that.cardUid) &&
+                Objects.equals(benefitUid, that.benefitUid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, MbtiId);
+        return Objects.hash(cardUid, benefitUid);
     }
 }

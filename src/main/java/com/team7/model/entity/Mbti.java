@@ -14,7 +14,7 @@ public class Mbti {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mbti_uid")
-    private Long id;
+    private Long mbtiUid;
 
     @Column(name = "mbti_value", length = 5, nullable = false)
     private String value;

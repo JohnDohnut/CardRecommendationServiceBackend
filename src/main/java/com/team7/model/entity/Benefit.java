@@ -15,10 +15,10 @@ public class Benefit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "benefit_uid")
-    private Long id;
+    private Long benefitUid;
 
     @Column(name = "benefit_on", length = 20, nullable = false)
-    private String on;
+    private String benefitOn;
 
     @Column(name = "type", length = 20, nullable = false)
     private String type;

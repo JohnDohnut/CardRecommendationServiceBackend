@@ -1,6 +1,6 @@
 package com.team7.model.relationship;
 
-import com.team7.model.complex.OwnershipId;
+import com.team7.model.complex.OwnershipUid;
 import com.team7.model.entity.Card;
 import com.team7.model.entity.Customer;
 import jakarta.persistence.*;
@@ -17,15 +17,15 @@ import lombok.Setter;
 public class Ownership {
 
     @EmbeddedId
-    private OwnershipId id = new OwnershipId();
+    private OwnershipUid id = new OwnershipUid();
 
     @ManyToOne
-    @MapsId("customerId")
+    @MapsId("customerUid")
     @JoinColumn(name = "customer_uid")
     private Customer customer;
 
     @ManyToOne
-    @MapsId("cardId")
+    @MapsId("cardUid")
     @JoinColumn(name = "card_uid")
     private Card card;
 
