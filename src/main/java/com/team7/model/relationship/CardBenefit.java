@@ -4,8 +4,14 @@ import com.team7.model.complex.CardBenefitId;
 import com.team7.model.entity.Benefit;
 import com.team7.model.entity.Card;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name = "card_benefit")
 public class CardBenefit {

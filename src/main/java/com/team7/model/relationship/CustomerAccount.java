@@ -4,7 +4,13 @@ import com.team7.model.entity.Customer;
 import jakarta.persistence.*;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name = "customer_account")
 public class CustomerAccount {

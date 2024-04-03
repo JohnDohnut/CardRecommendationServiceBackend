@@ -1,11 +1,14 @@
 package com.team7.model.entity;
 
-
 import jakarta.persistence.*;
-
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import java.util.Date;
 
-
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name = "customer")
 public class Customer {

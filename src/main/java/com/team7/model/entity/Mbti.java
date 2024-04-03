@@ -1,5 +1,12 @@
 package com.team7.model.entity;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name = "mbti")
 public class Mbti {

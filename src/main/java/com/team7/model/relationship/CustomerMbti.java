@@ -4,7 +4,14 @@ import com.team7.model.complex.CustomerMbtiId;
 import com.team7.model.entity.Customer;
 import com.team7.model.entity.Mbti;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
+
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name = "customer_mbti")
 public class CustomerMbti {

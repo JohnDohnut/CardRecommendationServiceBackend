@@ -4,7 +4,14 @@ import com.team7.model.complex.OwnershipId;
 import com.team7.model.entity.Card;
 import com.team7.model.entity.Customer;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
+
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name = "ownership")
 public class Ownership {
