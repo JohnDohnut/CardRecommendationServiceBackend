@@ -1,4 +1,4 @@
-package com.team7.db.repository;
+package com.team7.repository;
 import com.team7.model.Test;
 import org.springframework.data.jpa.repository.JpaRepository;
 

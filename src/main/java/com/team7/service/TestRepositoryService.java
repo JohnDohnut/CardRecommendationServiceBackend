@@ -1,7 +1,7 @@
-package com.team7.db.service;
+package com.team7.service;
 
 import com.team7.model.Test;
-import com.team7.db.repository.TestRepository;
+import com.team7.repository.TestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
