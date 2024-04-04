@@ -13,6 +13,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class TestController {
     public final CardService cardService;
-    public final CardVendorService cardVendorService;
 
 }
