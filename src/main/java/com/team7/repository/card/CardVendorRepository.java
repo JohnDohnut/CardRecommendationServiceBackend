@@ -2,10 +2,10 @@ package com.team7.repository.card;
 
 import com.team7.model.entity.CardVendor;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-
-@Service
+@Repository
 public interface CardVendorRepository extends JpaRepository<CardVendor, Long> {
 
     public CardVendor findCardVendorByName(String name);

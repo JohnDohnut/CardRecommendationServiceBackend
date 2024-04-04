@@ -31,7 +31,7 @@ public class Card {
     private byte[] image;
 
     @ManyToOne
-    @JoinColumn(name = "vendor", referencedColumnName = "card_vendor_uid", nullable = false)
+    @JoinColumn(name = "card_vendor", referencedColumnName = "card_vendor_uid", nullable = false)
     private CardVendor cardVendor;
 
     @ManyToOne

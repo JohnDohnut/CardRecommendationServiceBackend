@@ -12,13 +12,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class TestController {
-    public CardService cardService;
+    public final CardService cardService;
     public final CardVendorService cardVendorService;
-    @GetMapping("/testbed/vendor")
-    public CardVendor getVendor(){
+    @GetMapping("/testbed/vendorId")
+    public CardVendor getVendorById(){
         CardVendor rv = cardVendorService.findCardVendorByCardVendorUid(Long.valueOf(1));
         System.out.println(rv.getName());
         return rv;
     }
 
+    @GetMapping("/testbed/vendorName")
+    public CardVendor getVendorByName(String name){
+        CardVendor rv = cardVendorService.findCardVendorByName("우리카드");
+        System.out.println(rv.getName());
+        return rv;
+    }
+    @GetMapping("/testbed/cardName")
+    public Card getCardByName(String name){
+        Card rv = cardService.findCardByName("노리카드");
+        return rv;
+    }
 }
