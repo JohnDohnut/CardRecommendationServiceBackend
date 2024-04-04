@@ -15,7 +15,7 @@ public class CardBenefitService {
 
     private final CardBenefitRepository cardBenefitRepository;
 
-    public ArrayList<CardBenefit> getCardBenefitByUid(CardBenefitUid cardBenefitUid){
+    public CardBenefit getCardBenefitByUid(CardBenefitUid cardBenefitUid){
 
        return cardBenefitRepository.findCardBenefitByCardBenefitUid(cardBenefitUid);
 

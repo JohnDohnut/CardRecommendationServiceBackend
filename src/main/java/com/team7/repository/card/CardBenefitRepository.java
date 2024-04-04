@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @Repository
 public interface CardBenefitRepository extends JpaRepository<CardBenefit, CardBenefitUid> {
 
-    public ArrayList<CardBenefit> findCardBenefitByCardBenefitUid(CardBenefitUid cardBenefitUid);
+    public CardBenefit findCardBenefitByCardBenefitUid(CardBenefitUid cardBenefitUid);
 
     public ArrayList<CardBenefit> findCardBenefitByBenefitOn(String benefitOn);
 
