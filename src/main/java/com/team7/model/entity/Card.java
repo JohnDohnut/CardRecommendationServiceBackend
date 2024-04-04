@@ -38,5 +38,7 @@ public class Card {
     @JoinColumn(name = "mbti", referencedColumnName = "mbti_uid", nullable = false)
     private Mbti mbti;
 
+
+
     // 생성자, getter, setter...
 }

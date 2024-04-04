@@ -43,5 +43,6 @@ public class Customer {
     @JoinColumn(name = "mbti_uid")
     private Mbti mbti;
 
+
     // 생성자, getter, setter...
 }

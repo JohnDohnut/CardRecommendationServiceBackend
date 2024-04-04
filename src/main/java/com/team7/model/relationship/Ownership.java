@@ -17,7 +17,7 @@ import lombok.Setter;
 public class Ownership {
 
     @EmbeddedId
-    private OwnershipUid id = new OwnershipUid();
+    private OwnershipUid ownershipUid = new OwnershipUid();
 
     @ManyToOne
     @MapsId("customerUid")

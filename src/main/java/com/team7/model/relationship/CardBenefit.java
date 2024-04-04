@@ -17,7 +17,7 @@ import lombok.Setter;
 public class CardBenefit {
 
     @EmbeddedId
-    private CardBenefitUid id = new CardBenefitUid();
+    private CardBenefitUid cardBenefitUid = new CardBenefitUid();
 
     @ManyToOne
     @MapsId("cardUid")
