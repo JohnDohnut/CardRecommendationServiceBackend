@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MbtiRepository extends JpaRepository<Mbti, Long> {
 
-    public Mbti findByValue(String value);
+    public Mbti findMbtiByValue(String value);
 }
