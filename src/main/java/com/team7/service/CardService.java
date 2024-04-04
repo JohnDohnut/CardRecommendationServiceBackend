@@ -15,7 +15,11 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 public class CardService {
     private final CardReopository cardRepository;
+<<<<<<< HEAD
     private final cardVendorRepository;
+=======
+    private final CardVendorRepository cardVendorRepository;
+>>>>>>> fc35ff2add53130bf00f36b142352dc5d36ada2c
 
     public ArrayList<Card> findCardsByCardUid(Long uid){
         ArrayList<Card> rv = cardRepository.findCardsByCardUid(uid);
