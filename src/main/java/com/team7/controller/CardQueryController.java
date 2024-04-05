@@ -1,5 +1,6 @@
 package com.team7.controller;
 
+import com.team7.db.dto.CardDto;
 import com.team7.model.entity.Benefit;
 import com.team7.model.entity.Card;
 import com.team7.service.CardBenefitService;
@@ -30,4 +31,10 @@ public class CardQueryController {
         return rv;
     }
 
+    @GetMapping("/cards/card/{id}")
+    public CardDto CardgetCardByUid(@PathVariable Long id){
+        Card card = cardService.findCardByCardUid(id);
+        CardDto rv = new CardDto(card);
+        return rv;
+    }
 }

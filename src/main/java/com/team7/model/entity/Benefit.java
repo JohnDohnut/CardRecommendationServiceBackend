@@ -26,5 +26,4 @@ public class Benefit {
     @Column(name = "unit", length = 5, nullable = false)
     private String unit;
 
-    // 생성자, getter, setter...
 }

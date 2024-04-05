@@ -30,6 +30,9 @@ public class Card {
     @Column(name = "available", nullable = false)
     private int available;
 
+    @Column(name = "annual_fee")
+    private Long annualFee;
+
     @Lob
     @Column(name = "image")
     private byte[] image;
@@ -42,7 +45,7 @@ public class Card {
     @JoinColumn(name = "mbti", referencedColumnName = "mbti_uid", nullable = false)
     private Mbti mbti;
 
-    @OneToMany(mappedBy = "card")
+    @OneToMany(mappedBy = "card", fetch= FetchType.EAGER)
     List<CardBenefit> cardBenefits;
 
 
