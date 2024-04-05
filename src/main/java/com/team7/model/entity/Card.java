@@ -1,8 +1,12 @@
 package com.team7.model.entity;
+import com.team7.model.relationship.CardBenefit;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -38,6 +42,8 @@ public class Card {
     @JoinColumn(name = "mbti", referencedColumnName = "mbti_uid", nullable = false)
     private Mbti mbti;
 
+    @OneToMany(mappedBy = "card")
+    List<CardBenefit> cardBenefits;
 
 
     // 생성자, getter, setter...

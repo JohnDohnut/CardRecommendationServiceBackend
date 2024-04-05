@@ -13,12 +13,16 @@ import java.util.Optional;
 @Repository
 public interface CardReopository extends JpaRepository<Card, Long> {
 
-    public ArrayList<Card> findCardsByCardUid(Long uid);
+    public Card getCardByCardUid(Long uid);
+
+    public Card findCardByCardUid(Long uid);
+
     public ArrayList<Card> findCardsByName(String name);
 
     public ArrayList<Card> findCardsByType(String type);
 
     public ArrayList<Card> findCardsByAvailable(int available);
+
     public ArrayList<Card> findCardsByCardVendor(CardVendor cardVendor);
 
     public ArrayList<Card> findCardsByMbti(Mbti mbti);

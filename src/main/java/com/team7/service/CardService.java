@@ -5,7 +5,6 @@ import com.team7.model.entity.CardVendor;
 import com.team7.model.entity.Mbti;
 import com.team7.repository.card.CardBenefitRepository;
 import com.team7.repository.card.CardReopository;
-import com.team7.repository.card.CardVendorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +14,9 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 public class CardService {
     private final CardReopository cardRepository;
-<<<<<<< HEAD
-    private final cardVendorRepository;
-=======
-    private final CardVendorRepository cardVendorRepository;
->>>>>>> fc35ff2add53130bf00f36b142352dc5d36ada2c
 
-    public ArrayList<Card> findCardsByCardUid(Long uid){
-        ArrayList<Card> rv = cardRepository.findCardsByCardUid(uid);
+    public Card findCardByCardUid(Long uid){
+        Card rv = cardRepository.findCardByCardUid(uid);
         return rv;
     }
 

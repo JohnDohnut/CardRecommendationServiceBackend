@@ -2,39 +2,48 @@ package com.team7.service;
 
 
 import com.team7.model.complex.CardBenefitUid;
+import com.team7.model.entity.Benefit;
+import com.team7.model.entity.Card;
 import com.team7.model.relationship.CardBenefit;
+import com.team7.repository.card.BenefitRepository;
 import com.team7.repository.card.CardBenefitRepository;
+import com.team7.repository.card.CardReopository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class CardBenefitService {
 
     private final CardBenefitRepository cardBenefitRepository;
+    private final BenefitRepository benefitRepository;
+    private final CardReopository cardReopository;
 
-    public CardBenefit getCardBenefitByUid(CardBenefitUid cardBenefitUid){
+    public ArrayList<CardBenefit> getCardBenefitsByCard(Card card){
 
-       return cardBenefitRepository.findCardBenefitByCardBenefitUid(cardBenefitUid);
-
+        ArrayList<CardBenefit> rv = cardBenefitRepository.findCardBenefitsByCard(card);
+        return rv;
     }
 
-    public ArrayList<CardBenefit> getCardBenefitByBenefitOn(String benefitOn) {
+    public ArrayList<CardBenefit> getCardBenefitsByBenefit(Benefit benefit){
 
-        return cardBenefitRepository.findCardBenefitByBenefitOn(benefitOn);
-
+        ArrayList<CardBenefit> rv = cardBenefitRepository.findCardBenefitsByBenefit(benefit);
+        return rv;
     }
 
-    public ArrayList<CardBenefit> findCardBenefitByType(String type){
+    public Set<Benefit> getBenefitsOfCard(Card card){
+        System.out.println("get benefit invoked");
+        ArrayList<CardBenefit> cardBenefits = cardBenefitRepository.findCardBenefitsByCard(card);
 
-        return cardBenefitRepository.findCardBenefitByType(type);
-    }
-
-    public ArrayList<CardBenefit> findCardBenefitByUnit(String unit){
-
-        return cardBenefitRepository.findCardBenefitByUnit(unit);
+        Set<Benefit> benefits = cardBenefits
+                .stream()
+                .map(CardBenefit::getBenefit)
+                .collect(Collectors.toSet());
+        return benefits;
 
     }
 }
