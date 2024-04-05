@@ -1,4 +1,4 @@
-package com.team7.service;
+package com.team7.service.relationship;
 
 
 import com.team7.model.complex.CardBenefitUid;
@@ -35,15 +35,5 @@ public class CardBenefitService {
         return rv;
     }
 
-    public Set<Benefit> getBenefitsOfCard(Card card){
-        System.out.println("get benefit invoked");
-        ArrayList<CardBenefit> cardBenefits = cardBenefitRepository.findCardBenefitsByCard(card);
 
-        Set<Benefit> benefits = cardBenefits
-                .stream()
-                .map(CardBenefit::getBenefit)
-                .collect(Collectors.toSet());
-        return benefits;
-
-    }
 }

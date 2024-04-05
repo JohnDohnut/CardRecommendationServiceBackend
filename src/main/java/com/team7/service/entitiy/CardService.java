@@ -1,4 +1,4 @@
-package com.team7.service;
+package com.team7.service.entitiy;
 
 import com.team7.model.entity.Card;
 import com.team7.model.entity.CardVendor;
