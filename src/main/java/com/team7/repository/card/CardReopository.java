@@ -15,6 +15,8 @@ public interface CardReopository extends JpaRepository<Card, Long> {
 
     public Card getCardByCardUid(Long uid);
 
+    public ArrayList<Card> findAll();
+
     public Card findCardByCardUid(Long uid);
 
     public ArrayList<Card> findCardsByName(String name);

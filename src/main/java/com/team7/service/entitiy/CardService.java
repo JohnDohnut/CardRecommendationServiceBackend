@@ -15,6 +15,11 @@ import java.util.ArrayList;
 public class CardService {
     private final CardReopository cardRepository;
 
+    public ArrayList<Card> findAll(){
+        ArrayList<Card> cards=cardRepository.findAll();
+        return cards;
+    }
+
     public Card findCardByCardUid(Long uid){
         Card rv = cardRepository.findCardByCardUid(uid);
         return rv;

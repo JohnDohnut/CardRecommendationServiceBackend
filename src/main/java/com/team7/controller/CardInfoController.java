@@ -6,24 +6,34 @@ import com.team7.model.entity.Card;
 import com.team7.service.relationship.CardBenefitService;
 import com.team7.service.entitiy.CardService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-@CrossOrigin(originPatterns = "http://localhost:3000")
+@CrossOrigin(originPatterns = "http://localhost:3000",allowCredentials = "true")
 @RestController
+@RequestMapping("/cards")
 @RequiredArgsConstructor
 public class CardInfoController {
     public final CardService cardService;
     public final CardBenefitService cardBenefitService;
 
+    @GetMapping("")
+    public List<CardDto> showAllCards(){
+        ArrayList<Card> cardList=cardService.findAll();
+        List<CardDto> cardDtos = cardList.stream()
+                .map(o->new CardDto(o))
+                .collect(Collectors.toList());
 
-    @GetMapping("/cards/card/{id}")
+        return cardDtos;
+    }
+
+    @GetMapping("/card/{id}")
     public CardDto CardgetCardByUid(@PathVariable Long id){
         Card card = cardService.findCardByCardUid(id);
         CardDto rv = new CardDto(card);
