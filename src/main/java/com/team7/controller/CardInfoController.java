@@ -23,7 +23,7 @@ public class CardInfoController {
     public final CardService cardService;
     public final CardBenefitService cardBenefitService;
 
-    @GetMapping("")
+    @GetMapping("/")
     public List<CardDto> showAllCards(){
         ArrayList<Card> cardList=cardService.findAll();
         List<CardDto> cardDtos = cardList.stream()
@@ -39,4 +39,22 @@ public class CardInfoController {
         CardDto rv = new CardDto(card);
         return rv;
     }
+
+    @GetMapping("/{type}")
+    public List<CardDto> showByType(@PathVariable String type) {
+        String convertType="";
+        if(type.equals("credit")){
+            convertType="신용";
+        }
+        else if(type.equals("check")){
+            convertType="체크";
+        }
+        ArrayList<Card> cardList = cardService.findCardsByType(convertType);
+        List<CardDto> cardDtos = cardList.stream()
+                .map(card -> new CardDto(card))
+                .collect(Collectors.toList());
+
+        return cardDtos;
+    }
+
 }
