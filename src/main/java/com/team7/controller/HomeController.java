@@ -1,7 +1,7 @@
     package com.team7.controller;
 
 
-    import com.team7.dto.CustomerInfoDto;
+    import com.team7.dto.CustomerRegisterDto;
     import com.team7.model.entity.Customer;
     import com.team7.security.utils.token.Blacklist;
     import com.team7.security.utils.token.BlacklistRepository;
@@ -14,8 +14,6 @@
     import org.springframework.security.core.Authentication;
     import org.springframework.security.core.context.SecurityContextHolder;
     import org.springframework.web.bind.annotation.*;
-
-    import java.util.Arrays;
 
 
     @CrossOrigin(originPatterns = "http://localhost:3000")
@@ -40,20 +38,20 @@
         }
 
         @PostMapping("/register")
-        public ResponseEntity<String> postRegister(@RequestBody CustomerInfoDto customerInfoDto){
+        public ResponseEntity<String> postRegister(@RequestBody CustomerRegisterDto customerRegisterDto){
 
-            System.out.println(customerInfoDto.toString());
+            System.out.println(customerRegisterDto.toString());
 
-            if(customerService.findCustomerByAccountId(customerInfoDto.getAccountId()).isPresent()){
+            if(customerService.findCustomerByAccountId(customerRegisterDto.getAccountId()).isPresent()){
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("아이디 중복.");
             }
-            if(customerService.findCustomerByEmail(customerInfoDto.getEmail()).isPresent()){
+            if(customerService.findCustomerByEmail(customerRegisterDto.getEmail()).isPresent()){
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 존재하는 이메일.");
             }
-            if(customerService.findCustomerByPhone(customerInfoDto.getPhone()).isPresent()){
+            if(customerService.findCustomerByPhone(customerRegisterDto.getPhone()).isPresent()){
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 존재하는 휴대폰 번호.");
             }
-            Customer newCustomer = new Customer(customerInfoDto);
+            Customer newCustomer = new Customer(customerRegisterDto);
             customerService.save(newCustomer);
             return ResponseEntity.ok("회원가입 완료");
         }
