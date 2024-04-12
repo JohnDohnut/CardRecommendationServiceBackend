@@ -76,6 +76,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/login", "/", "/register").permitAll()
+                        .requestMatchers("/cards/**").permitAll()
                         .anyRequest().authenticated());
         //AuthenticationManager()와 JWTUtil 인수 전달
         http
