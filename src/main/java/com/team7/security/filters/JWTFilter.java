@@ -3,6 +3,7 @@ package com.team7.security.filters;
 import com.team7.model.entity.Customer;
 import com.team7.repository.customer.CustomerRepository;
 import com.team7.security.utils.JWTUtil;
+import com.team7.security.utils.token.BlacklistRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,15 +16,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+
+@RequiredArgsConstructor
 public class JWTFilter extends OncePerRequestFilter {
 
 
     private final JWTUtil jwtUtil;
     private final CustomerRepository customerRepository;
-    public JWTFilter(JWTUtil jwtUtil, CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-        this.jwtUtil = jwtUtil;
-    }
+    private final BlacklistRepository blacklistRepository;
 
 
     @Override
@@ -31,6 +31,10 @@ public class JWTFilter extends OncePerRequestFilter {
 
         //request에서 Authorization 헤더를 찾음
         String authorization= request.getHeader("Authorization");
+        if(request.getParameter("username") != null){
+            filterChain.doFilter(request, response);
+            return;
+        }
         //Authorization 헤더 검증
         if (authorization == null || !authorization.startsWith("Bearer ")) {
 
@@ -53,6 +57,13 @@ public class JWTFilter extends OncePerRequestFilter {
 
             //조건이 해당되면 메소드 종료 (필수)
             return ;
+        }
+
+        if (blacklistRepository.findBlacklistByToken(token).isPresent()){
+            System.out.println("Invalid Token - User dropped");
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            filterChain.doFilter(request, response);
+            return;
         }
 
 

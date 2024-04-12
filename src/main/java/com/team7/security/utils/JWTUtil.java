@@ -1,26 +1,27 @@
 package com.team7.security.utils;
 
+import com.team7.security.utils.token.Blacklist;
+import com.team7.security.utils.token.BlacklistRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 
 @Component
 public class JWTUtil {
 
+
     private Key key;
 
-    public JWTUtil(@Value("${spring.jwt.secret}")String secret) {
 
+    public JWTUtil(@Value("${spring.jwt.secret}")String secret) {
 
         byte[] byteSecretKey = Decoders.BASE64.decode(secret);
         key = Keys.hmacShaKeyFor(byteSecretKey);
