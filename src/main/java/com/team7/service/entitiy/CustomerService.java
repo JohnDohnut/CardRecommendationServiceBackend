@@ -1,15 +1,15 @@
 package com.team7.service.entitiy;
 
-import com.team7.model.entity.CardVendor;
 import com.team7.model.entity.Customer;
 import com.team7.model.entity.Mbti;
-import com.team7.repository.card.CustomerRepository;
+import com.team7.repository.customer.CustomerRepository;
 import com.team7.repository.card.MbtiRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,25 +17,21 @@ public class CustomerService {
     private final MbtiRepository mbtiRepository;
     private final CustomerRepository customerRepository;
 
-    public Customer findCustomerByCustomerUid(Long customerUid){
+    public Optional<Customer> findCustomerByCustomerUid(Long customerUid){
         return customerRepository.findCustomerByCustomerUid(customerUid);
     }
 
-    public Customer findCustomerByPhone(String phone){
+    public Optional<Customer> findCustomerByPhone(String phone){
         return customerRepository.findCustomerByPhone(phone);
     }
 
-    public Customer findCustomerByEmail(String email){
+    public Optional<Customer> findCustomerByEmail(String email){
         return customerRepository.findCustomerByEmail(email);
     }
 
-    public ArrayList<Customer> findCustomerByBirth(Date birth){
-        ArrayList<Customer> customers = customerRepository.findAllByBirth(birth);
-        return customers;
-    }
 
-    public Customer findCustomerByAccountId(String accountId, String accountPassword){
-        return customerRepository.findCustomerByAccountIdAndAccountPassword(accountId, accountPassword);
+    public Optional<Customer> findCustomerByAccountId(String accountId){
+        return customerRepository.findCustomerByAccountId(accountId);
     }
 
     public ArrayList<Customer> findCustomerByAccountPassword(String accountPassword){
@@ -54,5 +50,8 @@ public class CustomerService {
         return customers;
     }
 
+    public Customer save(Customer customer){
+        return customerRepository.save(customer);
+    }
 
 }

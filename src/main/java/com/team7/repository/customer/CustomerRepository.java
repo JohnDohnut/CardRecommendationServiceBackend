@@ -1,4 +1,4 @@
-package com.team7.repository.card;
+package com.team7.repository.customer;
 
 import com.team7.model.entity.Customer;
 import com.team7.model.entity.Mbti;
@@ -7,25 +7,27 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-    public Customer findCustomerByCustomerUid(Long customerUid);
+    public Optional<Customer> findCustomerByCustomerUid(Long customerUid);
 
-    public Customer findCustomerByPhone(String phone);
+    public Optional<Customer> findCustomerByPhone(String phone);
 
-    public Customer findCustomerByEmail(String email);
+    public Optional<Customer> findCustomerByEmail(String email);
 
-    public ArrayList<Customer> findAllByBirth(Date birth);
 
-    public Customer findCustomerByAccountIdAndAccountPassword(String accountId, String accountPassword);
+    public Optional<Customer> findCustomerByAccountIdAndAccountPassword(String accountId, String accountPassword);
 
     public ArrayList<Customer> findAllByAccountPassword(String accountPassword);
 
     public ArrayList<Customer> findAllByMbti(Mbti mbti);
 
     public ArrayList<Customer> findAllByMbtiValue(String mbtiValue);
+
+    public Optional<Customer> findCustomerByAccountId(String accountId);
 
 
 }

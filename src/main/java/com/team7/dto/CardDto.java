@@ -1,18 +1,13 @@
-package com.team7.db.dto;
+package com.team7.dto;
 
 
-import com.team7.model.entity.Benefit;
 import com.team7.model.entity.Card;
 import com.team7.model.entity.CardVendor;
 import com.team7.model.entity.Mbti;
-import com.team7.model.relationship.CardBenefit;
-import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter

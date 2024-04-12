@@ -1,6 +1,6 @@
 package com.team7.repository.card;
 
-import com.team7.model.complex.CardBenefitUid;
+import com.team7.model.embededkey.CardBenefitUid;
 import com.team7.model.entity.Benefit;
 import com.team7.model.entity.Card;
 import com.team7.model.relationship.CardBenefit;

@@ -1,6 +1,6 @@
 package com.team7.model.relationship;
 
-import com.team7.model.complex.CardBenefitUid;
+import com.team7.model.embededkey.CardBenefitUid;
 import com.team7.model.entity.Benefit;
 import com.team7.model.entity.Card;
 import jakarta.persistence.*;

@@ -1,4 +1,4 @@
-package com.team7.model.complex;
+package com.team7.model.embededkey;
 
 import jakarta.persistence.*;
 import lombok.Getter;
