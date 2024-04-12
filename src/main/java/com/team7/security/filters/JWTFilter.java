@@ -39,7 +39,7 @@ public class JWTFilter extends OncePerRequestFilter {
         if (authorization == null || !authorization.startsWith("Bearer ")) {
 
             System.out.println("token null");
-            filterChain.doFilter(request, response);
+            //filterChain.doFilter(request, response);
 
             //조건이 해당되면 메소드 종료 (필수)
             return;
@@ -53,7 +53,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
             System.out.println("token expired");
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            filterChain.doFilter(request, response);
+           // filterChain.doFilter(request, response);
 
             //조건이 해당되면 메소드 종료 (필수)
             return ;
@@ -62,7 +62,7 @@ public class JWTFilter extends OncePerRequestFilter {
         if (blacklistRepository.findBlacklistByToken(token).isPresent()){
             System.out.println("Invalid Token - User dropped");
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            filterChain.doFilter(request, response);
+            //filterChain.doFilter(request, response);
             return;
         }
 

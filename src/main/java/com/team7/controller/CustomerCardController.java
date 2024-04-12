@@ -2,6 +2,7 @@ package com.team7.controller;
 
 
 import com.team7.dto.CardDto;
+import com.team7.dto.CustomerInfoDto;
 import com.team7.model.entity.Card;
 import com.team7.model.relationship.Ownership;
 import com.team7.service.entitiy.CustomerService;
@@ -23,6 +24,11 @@ import java.util.stream.Collectors;
 public class CustomerCardController {
     private final CustomerService customerService;
     private final OwnershipService ownershipService;
+    @GetMapping("/myInfo")
+    public ArrayList<CustomerInfoDto> getCustomerInfo(){
+        return null;
+    }
+
     @GetMapping("/myCards")
     public ArrayList<CardDto> getCustomerCards(){
         String customerAccountId = SecurityContextHolder.getContext().getAuthentication().getName();
