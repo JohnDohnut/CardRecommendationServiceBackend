@@ -17,8 +17,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
-    private ObjectMapper om = new ObjectMapper();
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     private final AuthenticationManager authenticationManager;
     //JWTUtil 주입
@@ -65,6 +63,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         response.addHeader("Authorization", "Bearer " + token);
         response.addHeader("Refresh", null);
+
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
 

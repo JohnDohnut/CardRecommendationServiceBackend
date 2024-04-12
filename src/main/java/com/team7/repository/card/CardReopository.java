@@ -27,4 +27,5 @@ public interface CardReopository extends JpaRepository<Card, Long> {
 
     public ArrayList<Card> findCardsByMbti(Mbti mbti);
 
+
 }

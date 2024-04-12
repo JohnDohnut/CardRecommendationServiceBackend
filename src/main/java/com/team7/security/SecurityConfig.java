@@ -4,6 +4,7 @@ import com.team7.repository.customer.CustomerRepository;
 import com.team7.security.filters.JWTFilter;
 import com.team7.security.filters.LoginFilter;
 import com.team7.security.utils.JWTUtil;
+import com.team7.security.utils.token.BlacklistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -29,6 +31,7 @@ public class SecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
     private final UserDetailsService userDetailsService;
     private final JWTUtil jwtUtil;
+    private final BlacklistRepository blacklistRepository;
 
 //
 //    public AuthenticationProvider authenticationProvider() {
@@ -82,10 +85,12 @@ public class SecurityConfig {
         http
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
         http
-                .addFilterBefore(new JWTFilter(jwtUtil, customerRepository), LoginFilter.class);
+                .addFilterBefore(new JWTFilter(jwtUtil, customerRepository, blacklistRepository), LoginFilter.class);
         http
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http
+                .logout(logout -> logout.disable());
         return http.build();
     }
 }

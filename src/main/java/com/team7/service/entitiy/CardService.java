@@ -1,5 +1,6 @@
 package com.team7.service.entitiy;
 
+import com.team7.dto.CardDto;
 import com.team7.model.entity.Card;
 import com.team7.model.entity.CardVendor;
 import com.team7.model.entity.Mbti;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -44,7 +46,18 @@ public class CardService {
         return rv;
     }
 
+    public ArrayList<Card> findAllCards(){
+        ArrayList<Card> rv = new ArrayList<>(cardRepository.findAll());
+        return rv;
+    }
 
+    public ArrayList<CardDto> cardsToCardDtos(ArrayList<Card> cards){
 
+        return new ArrayList<>(cards.stream().map(card -> new CardDto(card)).collect(Collectors.toList()));
+    }
+
+    public CardDto cardToCardDto(Card card){
+        return new CardDto(card);
+    }
 }
 
