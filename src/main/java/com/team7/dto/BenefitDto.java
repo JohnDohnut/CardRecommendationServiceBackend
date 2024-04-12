@@ -1,4 +1,4 @@
-package com.team7.db.dto;
+package com.team7.dto;
 
 import com.team7.model.entity.Benefit;
 import com.team7.model.entity.Card;

@@ -1,7 +1,6 @@
 package com.team7.controller;
 
-import com.team7.db.dto.CardDto;
-import com.team7.model.entity.Benefit;
+import com.team7.dto.CardDto;
 import com.team7.model.entity.Card;
 import com.team7.service.relationship.CardBenefitService;
 import com.team7.service.entitiy.CardService;
@@ -10,10 +9,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 @CrossOrigin(originPatterns = "http://localhost:3000")
 @RestController

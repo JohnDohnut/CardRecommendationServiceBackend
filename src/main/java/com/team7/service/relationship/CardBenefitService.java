@@ -1,7 +1,6 @@
 package com.team7.service.relationship;
 
 
-import com.team7.model.complex.CardBenefitUid;
 import com.team7.model.entity.Benefit;
 import com.team7.model.entity.Card;
 import com.team7.model.relationship.CardBenefit;
@@ -12,8 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +27,6 @@ public class CardBenefitService {
     }
 
     public ArrayList<CardBenefit> getCardBenefitsByBenefit(Benefit benefit){
-
         ArrayList<CardBenefit> rv = cardBenefitRepository.findCardBenefitsByBenefit(benefit);
         return rv;
     }

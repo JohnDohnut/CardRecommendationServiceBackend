@@ -1,7 +1,7 @@
 package com.team7.service.complexed;
 
 
-import com.team7.db.dto.CardDto;
+import com.team7.dto.CardDto;
 import com.team7.model.entity.Benefit;
 import com.team7.model.entity.Card;
 import com.team7.model.relationship.CardBenefit;

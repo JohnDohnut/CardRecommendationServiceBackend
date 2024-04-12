@@ -1,17 +1,38 @@
 package com.team7.model.entity;
 
+import com.team7.dto.CustomerInfoDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @RequiredArgsConstructor
 @Entity
 @Table(name = "customer")
-public class Customer {
+public class Customer implements UserDetails {
+
+    public Customer (CustomerInfoDto customerInfoDto){
+        this.customerUid = null;
+        this.firstName = customerInfoDto.getFirstName();
+        this.lastName = customerInfoDto.getLastName();
+        this.birth = customerInfoDto.getBirth();
+        this.phone = customerInfoDto.getPhone();
+        this.email = customerInfoDto.getEmail();
+        this.accountId = customerInfoDto.getAccountId();
+        this.accountPassword = customerInfoDto.getAccountPassword();
+        this.accessToken = null;
+        this.refreshToken = null;
+        this.mbti = null;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,9 +60,50 @@ public class Customer {
     @Column(name = "account_password")
     private String accountPassword;
 
+    @Column(name = "refresh_token")
+    private String refreshToken;
+
+    @Column(name = "access_token")
+    private String accessToken;
+
     @ManyToOne
-    @JoinColumn(name = "mbti_uid")
+    @JoinColumn(name = "mbti")
     private Mbti mbti;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("user"));
+    }
+
+    @Override
+    public String getPassword() {
+        return this.accountPassword;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.accountId;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 
     // 생성자, getter, setter...
