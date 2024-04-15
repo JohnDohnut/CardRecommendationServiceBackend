@@ -1,6 +1,6 @@
 package com.team7.model.entity;
 
-import com.team7.dto.CustomerInfoDto;
+import com.team7.dto.CustomerRegisterDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -20,15 +20,15 @@ import java.util.List;
 @Table(name = "customer")
 public class Customer implements UserDetails {
 
-    public Customer (CustomerInfoDto customerInfoDto){
+    public Customer (CustomerRegisterDto customerRegisterDto){
         this.customerUid = null;
-        this.firstName = customerInfoDto.getFirstName();
-        this.lastName = customerInfoDto.getLastName();
-        this.birth = customerInfoDto.getBirth();
-        this.phone = customerInfoDto.getPhone();
-        this.email = customerInfoDto.getEmail();
-        this.accountId = customerInfoDto.getAccountId();
-        this.accountPassword = customerInfoDto.getAccountPassword();
+        this.firstName = customerRegisterDto.getFirstName();
+        this.lastName = customerRegisterDto.getLastName();
+        this.birth = customerRegisterDto.getBirth();
+        this.phone = customerRegisterDto.getPhone();
+        this.email = customerRegisterDto.getEmail();
+        this.accountId = customerRegisterDto.getAccountId();
+        this.accountPassword = customerRegisterDto.getAccountPassword();
         this.accessToken = null;
         this.refreshToken = null;
         this.mbti = null;
