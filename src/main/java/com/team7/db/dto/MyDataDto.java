@@ -2,7 +2,11 @@ package com.team7.db.dto;
 
 import com.team7.db.model.entity.Customer;
 import com.team7.db.model.entity.MyData;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class MyDataDto {
     private Long mydataId;
     private int age;

@@ -22,4 +22,5 @@ public interface MyDataRepository extends JpaRepository<MyData, Long> {
     public ArrayList<MyData> findMyDatasByVehicleAvailability(Boolean vehicleAvaiability);
 
     public ArrayList<MyData> findMyDatasByLifeStage(String lifeStage);
+
 }

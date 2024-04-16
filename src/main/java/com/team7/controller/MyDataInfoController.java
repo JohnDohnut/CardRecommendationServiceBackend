@@ -1,5 +1,6 @@
 package com.team7.controller;
 
+import com.team7.db.dto.CardDto;
 import com.team7.db.dto.MyDataDto;
 import com.team7.db.model.entity.MyData;
 import com.team7.service.entitiy.MyDataService;
@@ -17,6 +18,12 @@ import java.util.stream.Collectors;
 @RequestMapping("/myDataInfo")
 public class MyDataInfoController {
     public final MyDataService myDataService;
+
+    @ResponseBody
+    @GetMapping("/")
+    public ArrayList<MyDataDto> getMyDatas(){
+        return myDataService.myDatasToMyDataDtos(myDataService.findAllMyDatas());
+    }
 
     @ResponseBody
     @GetMapping("/searh/{age}")

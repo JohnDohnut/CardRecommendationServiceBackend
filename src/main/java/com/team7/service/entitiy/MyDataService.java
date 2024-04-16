@@ -1,6 +1,8 @@
 package com.team7.service.entitiy;
 
+import com.team7.db.dto.CardDto;
 import com.team7.db.dto.MyDataDto;
+import com.team7.db.model.entity.Card;
 import com.team7.db.model.entity.Customer;
 import com.team7.db.model.entity.MyData;
 import com.team7.db.repository.customer.MyDataRepository;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -46,5 +49,15 @@ public class MyDataService {
     };
 
     public MyDataDto myDataToMyDataDto(MyData myData){return new MyDataDto((myData));}
+
+    public ArrayList<MyDataDto> myDatasToMyDataDtos(ArrayList<MyData> myDatas){
+
+        return new ArrayList<>(myDatas.stream().map(myData -> new MyDataDto(myData)).collect(Collectors.toList()));
+    }
+
+    public ArrayList<MyData> findAllMyDatas(){
+        ArrayList<MyData> rv = new ArrayList<>(myDataRepository.findAll());
+        return rv;
+    }
 
 }
