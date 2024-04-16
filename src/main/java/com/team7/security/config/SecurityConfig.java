@@ -1,6 +1,7 @@
 package com.team7.security.config;
 
 import com.team7.db.repository.customer.CustomerRepository;
+import com.team7.db.repository.log.RequestLogRepository;
 import com.team7.security.filters.JWTFilter;
 import com.team7.security.filters.LoginFilter;
 import com.team7.security.utils.JWTUtil;
@@ -14,6 +15,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -31,7 +33,7 @@ public class SecurityConfig {
     private final UserDetailsService userDetailsService;
     private final JWTUtil jwtUtil;
     private final BlacklistRepository blacklistRepository;
-
+    private final RequestLogRepository requestLogRepository;
 //
 //    public AuthenticationProvider authenticationProvider() {
 //        return new LoginAuthenticationProvider();
@@ -65,33 +67,33 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-                .httpBasic(httpBasic -> httpBasic.disable());
+                .httpBasic(AbstractHttpConfigurer::disable);
         http
-                .csrf((auth) -> auth.disable());
+                .csrf(AbstractHttpConfigurer::disable);
 
         http
-                .formLogin((auth) -> auth.disable());
+                .formLogin(formLogin->formLogin.disable());
 
         http
-                .httpBasic((auth) -> auth.disable());
+                .httpBasic(AbstractHttpConfigurer::disable);
 
         http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/", "/home").permitAll()
                         .requestMatchers("/login", "register").anonymous()
-                        .requestMatchers("/customer/**").authenticated()
+                        .requestMatchers("/customer/**", "logout").authenticated()
                         .requestMatchers("/cards/**").permitAll()
                         .anyRequest().authenticated());
         //AuthenticationManager()와 JWTUtil 인수 전달
         http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, requestLogRepository), UsernamePasswordAuthenticationFilter.class);
         http
                 .addFilterBefore(new JWTFilter(jwtUtil, customerRepository, blacklistRepository), LoginFilter.class);
         http
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http
-                .logout(logout -> logout.disable());
+                .logout(AbstractHttpConfigurer::disable);
         return http.build();
     }
 }

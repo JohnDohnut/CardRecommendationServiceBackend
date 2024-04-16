@@ -1,10 +1,13 @@
 package com.team7.security.filters;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.team7.aspect.AOPLogger;
+import com.team7.db.repository.log.RequestLogRepository;
 import com.team7.security.utils.JWTUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,17 +20,15 @@ import org.w3c.dom.ls.LSOutput;
 import java.util.Collection;
 import java.util.Iterator;
 
+@RequiredArgsConstructor
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
     //JWTUtil 주입
     private final JWTUtil jwtUtil;
 
-    public LoginFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
+    private final RequestLogRepository requestLogRepository;
 
-        this.authenticationManager = authenticationManager;
-        this.jwtUtil = jwtUtil;
-    }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -37,8 +38,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String password = request.getParameter("password");
 
         System.out.println("delivering payload ");
-        System.out.println(username);
-        System.out.println(password);
+        System.out.println(username==null);
+        System.out.println(password==null);
         //스프링 시큐리티에서 username과 password를 검증하기 위해서는 token에 담아야 함
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
 
@@ -75,7 +76,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     //로그인 실패시 실행하는 메소드
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) {
-        System.out.println(failed.toString());
+        System.out.println("AuthenticationFailed");
         response.setStatus(401);
     }
 }

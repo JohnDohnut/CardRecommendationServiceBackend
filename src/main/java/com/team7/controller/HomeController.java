@@ -9,16 +9,16 @@
     import jakarta.servlet.http.HttpServletRequest;
     import jakarta.servlet.http.HttpServletResponse;
     import lombok.RequiredArgsConstructor;
+    import lombok.extern.slf4j.Slf4j;
     import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
     import org.springframework.security.core.Authentication;
     import org.springframework.security.core.context.SecurityContextHolder;
     import org.springframework.web.bind.annotation.*;
 
-
+    @Slf4j
     @CrossOrigin(originPatterns = "http://localhost:3000")
     @RestController
-    @ResponseBody
     @RequiredArgsConstructor
     public class HomeController {
         private final BlacklistRepository blacklistRepository;
@@ -36,8 +36,8 @@
             return "index.html";
         }
 
-        @PostMapping("/login")
-        public String getLogin(){
+        @GetMapping("/login")
+        public String login(HttpServletRequest request, HttpServletResponse response){
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             System.out.println("entered login");
             return authentication.getName();
@@ -63,12 +63,13 @@
         }
 
         @PostMapping("/logout")
-        public void getLogout(HttpServletRequest request, HttpServletResponse response){
-            System.out.println("Customer Logout");
+        public String postLogout(HttpServletRequest request, HttpServletResponse response){
+            log.debug("logout controller");
             String token = request.getHeader("Authorization").split(" ")[1];
             Blacklist blacklist = new Blacklist(token);
             blacklistRepository.save(blacklist);
             SecurityContextHolder.clearContext();
+            return "loggedout";
 
 
         }

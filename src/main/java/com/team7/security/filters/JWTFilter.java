@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -64,7 +65,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
         }
 
-        if (isInBlacklist(authorization)){
+        if (isInBlacklist(token)){
             System.out.println("Invalid Token - User dropped");
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             filterChain.doFilter(request, response);
@@ -80,7 +81,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
         //UserDetails에 회원 정보 객체 담기
         Customer customUserDetails = customerRepository.findCustomerByAccountId(username).get();
-
+        System.out.println("constructing authToken");
         //스프링 시큐리   티 인증 토큰 생성
         Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
         //세션에 사용자 등록
