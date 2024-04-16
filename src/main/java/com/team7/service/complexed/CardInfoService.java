@@ -1,13 +1,13 @@
 package com.team7.service.complexed;
 
 
-import com.team7.dto.CardDto;
-import com.team7.model.entity.Benefit;
-import com.team7.model.entity.Card;
-import com.team7.model.relationship.CardBenefit;
-import com.team7.repository.card.BenefitRepository;
-import com.team7.repository.card.CardBenefitRepository;
-import com.team7.repository.card.CardReopository;
+import com.team7.db.dto.CardDto;
+import com.team7.db.model.entity.Benefit;
+import com.team7.db.model.entity.Card;
+import com.team7.db.model.relationship.CardBenefit;
+import com.team7.db.repository.card.BenefitRepository;
+import com.team7.db.repository.card.CardBenefitRepository;
+import com.team7.db.repository.card.CardReopository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

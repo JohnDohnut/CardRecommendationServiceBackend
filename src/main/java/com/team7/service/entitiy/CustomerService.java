@@ -1,14 +1,13 @@
 package com.team7.service.entitiy;
 
-import com.team7.model.entity.Customer;
-import com.team7.model.entity.Mbti;
-import com.team7.repository.customer.CustomerRepository;
-import com.team7.repository.card.MbtiRepository;
+import com.team7.db.model.entity.Customer;
+import com.team7.db.model.entity.Mbti;
+import com.team7.db.repository.customer.CustomerRepository;
+import com.team7.db.repository.card.MbtiRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Optional;
 
 @Service

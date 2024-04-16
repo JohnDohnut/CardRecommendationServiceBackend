@@ -1,10 +1,10 @@
 package com.team7.controller;
 
 
-import com.team7.dto.CardDto;
-import com.team7.dto.CustomerInfoDTO;
-import com.team7.model.entity.Customer;
-import com.team7.model.relationship.Ownership;
+import com.team7.db.dto.CardDto;
+import com.team7.db.dto.CustomerInfoDTO;
+import com.team7.db.model.entity.Customer;
+import com.team7.db.model.relationship.Ownership;
 import com.team7.security.utils.JWTUtil;
 import com.team7.service.entitiy.CustomerService;
 import com.team7.service.relationship.OwnershipService;

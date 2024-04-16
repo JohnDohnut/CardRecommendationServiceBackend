@@ -1,9 +1,8 @@
 package com.team7.service.entitiy;
 
-import com.team7.model.entity.Mbti;
-import com.team7.repository.card.MbtiRepository;
+import com.team7.db.model.entity.Mbti;
+import com.team7.db.repository.card.MbtiRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @Service

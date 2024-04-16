@@ -1,9 +1,9 @@
 package com.team7.service.relationship;
 
-import com.team7.model.entity.Card;
-import com.team7.model.entity.Customer;
-import com.team7.model.relationship.Ownership;
-import com.team7.repository.card.OwnershipRepository;
+import com.team7.db.model.entity.Card;
+import com.team7.db.model.entity.Customer;
+import com.team7.db.model.relationship.Ownership;
+import com.team7.db.repository.card.OwnershipRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

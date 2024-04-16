@@ -1,10 +1,10 @@
     package com.team7.controller;
 
 
-    import com.team7.dto.CustomerRegisterDto;
-    import com.team7.model.entity.Customer;
-    import com.team7.security.utils.token.Blacklist;
-    import com.team7.security.utils.token.BlacklistRepository;
+    import com.team7.db.dto.CustomerRegisterDto;
+    import com.team7.db.model.entity.Customer;
+    import com.team7.db.model.token.Blacklist;
+    import com.team7.db.repository.token.BlacklistRepository;
     import com.team7.service.entitiy.CustomerService;
     import jakarta.servlet.http.HttpServletRequest;
     import jakarta.servlet.http.HttpServletResponse;
@@ -24,10 +24,16 @@
         private final BlacklistRepository blacklistRepository;
         private final CustomerService customerService;
         @GetMapping("/")
-        public String getIndexPage(){
+        @ResponseBody
+        public String getIndexPage(HttpServletRequest request, HttpServletResponse response){
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             System.out.println("returning " + authentication.getName());
             return authentication.getName();
+        }
+
+        @GetMapping("/home")
+        public String getHomePage(HttpServletRequest request, HttpServletResponse response){
+            return "index.html";
         }
 
         @PostMapping("/login")

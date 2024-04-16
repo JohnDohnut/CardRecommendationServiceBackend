@@ -1,9 +1,10 @@
 package com.team7.security.filters;
 
-import com.team7.model.entity.Customer;
-import com.team7.repository.customer.CustomerRepository;
+import com.team7.db.model.entity.Customer;
+import com.team7.db.repository.customer.CustomerRepository;
 import com.team7.security.utils.JWTUtil;
-import com.team7.security.utils.token.BlacklistRepository;
+import com.team7.db.repository.token.BlacklistRepository;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,13 +26,16 @@ public class JWTFilter extends OncePerRequestFilter {
     private final CustomerRepository customerRepository;
     private final BlacklistRepository blacklistRepository;
 
-
+    private boolean isInBlacklist(String token){
+        return blacklistRepository.findBlacklistByToken(token).isPresent();
+    }
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException, ServletException, IOException {
-
+        System.out.println("jwt filter");
         //request에서 Authorization 헤더를 찾음
         String authorization= request.getHeader("Authorization");
-        if(request.getParameter("username") != null){
+        String refresh = request.getHeader("Refresh");
+        if(request.getParameter("username") != null || request.getParameter("password") != null){
             filterChain.doFilter(request, response);
             return;
         }
@@ -39,9 +43,8 @@ public class JWTFilter extends OncePerRequestFilter {
         if (authorization == null || !authorization.startsWith("Bearer ")) {
 
             System.out.println("token null");
-            //filterChain.doFilter(request, response);
-
-            //조건이 해당되면 메소드 종료 (필수)
+            filterChain.doFilter(request, response);
+            //조건이 해당되면 메소드 종료 (필수)s
             return;
         }
 
@@ -49,20 +52,22 @@ public class JWTFilter extends OncePerRequestFilter {
         //Bearer 부분 제거 후 순수 토큰만 획득
         String token = authorization.split(" ")[1];
         //토큰 소멸 시간 검증
-        if (jwtUtil.isExpired(token)) {
+        try{
 
-            System.out.println("token expired");
+            jwtUtil.isExpired(token);
+
+        }
+        catch(ExpiredJwtException e){
+            System.out.println("Expired Token Accepted");
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-           // filterChain.doFilter(request, response);
+            filterChain.doFilter(request, response);
 
-            //조건이 해당되면 메소드 종료 (필수)
-            return ;
         }
 
-        if (blacklistRepository.findBlacklistByToken(token).isPresent()){
+        if (isInBlacklist(authorization)){
             System.out.println("Invalid Token - User dropped");
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            //filterChain.doFilter(request, response);
+            filterChain.doFilter(request, response);
             return;
         }
 

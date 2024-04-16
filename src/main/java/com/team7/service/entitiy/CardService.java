@@ -1,11 +1,10 @@
 package com.team7.service.entitiy;
 
-import com.team7.dto.CardDto;
-import com.team7.model.entity.Card;
-import com.team7.model.entity.CardVendor;
-import com.team7.model.entity.Mbti;
-import com.team7.repository.card.CardBenefitRepository;
-import com.team7.repository.card.CardReopository;
+import com.team7.db.dto.CardDto;
+import com.team7.db.model.entity.Card;
+import com.team7.db.model.entity.CardVendor;
+import com.team7.db.model.entity.Mbti;
+import com.team7.db.repository.card.CardReopository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +57,10 @@ public class CardService {
 
     public CardDto cardToCardDto(Card card){
         return new CardDto(card);
+    }
+
+    public ArrayList<Card> searchCardsByName(String name){
+        return cardRepository.findCardsByNameLike("%"+name+"%");
     }
 }
 

@@ -12,6 +12,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -30,6 +31,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        System.out.println("login filter");
         //클라이언트 요청에서 username, password 추출
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -59,10 +61,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String role = auth.getAuthority();
 
-        String token = jwtUtil.createJwt(username, role, 60*1000*60L);
-
-        response.addHeader("Authorization", "Bearer " + token);
-        response.addHeader("Refresh", null);
+        String accessToken = jwtUtil.createJwt(username, role, 60*1000*60L);
+        String refreshToken = jwtUtil.createJwt(username, role, 60*1000*60L*10);
+        response.addHeader("Authorization", "Bearer " + accessToken);
+        response.addHeader("Refresh", "Bearer " + refreshToken);
 
 
         SecurityContextHolder.getContext().setAuthentication(authentication);

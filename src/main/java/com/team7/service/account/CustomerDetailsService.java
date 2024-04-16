@@ -1,16 +1,13 @@
 package com.team7.service.account;
 
-import com.team7.model.entity.Customer;
-import com.team7.repository.customer.CustomerRepository;
+import com.team7.db.model.entity.Customer;
+import com.team7.db.repository.customer.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
