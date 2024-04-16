@@ -16,7 +16,7 @@
     import org.springframework.web.bind.annotation.*;
 
 
-    @CrossOrigin(originPatterns = "http://localhost:3000")
+    @CrossOrigin(originPatterns = "http://localhost:5173")
     @RestController
     @ResponseBody
     @RequiredArgsConstructor
@@ -24,6 +24,7 @@
         private final BlacklistRepository blacklistRepository;
         private final CustomerService customerService;
         @GetMapping("/")
+        @ResponseBody
         public String getIndexPage(){
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             System.out.println("returning " + authentication.getName());
