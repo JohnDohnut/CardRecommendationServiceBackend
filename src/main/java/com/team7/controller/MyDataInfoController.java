@@ -1,0 +1,54 @@
+package com.team7.controller;
+
+import com.team7.db.dto.MyDataDto;
+import com.team7.db.model.entity.MyData;
+import com.team7.service.entitiy.MyDataService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+@CrossOrigin(originPatterns = "http://localhost:3000")
+@RestController
+@RequiredArgsConstructor
+@Slf4j
+@RequestMapping("/myDataInfo")
+public class MyDataInfoController {
+    public final MyDataService myDataService;
+
+    @ResponseBody
+    @GetMapping("/searh/{age}")
+    public ArrayList<MyDataDto> getMyDataByAge(int age){
+        ArrayList<MyData> myDatas = myDataService.findMyDatasByAge(age);
+        ArrayList<MyDataDto> rv = new ArrayList<>(myDatas.stream().map(myData -> myDataService.myDataToMyDataDto(myData)).collect(Collectors.toList()));
+        return rv;
+    }
+
+    @ResponseBody
+    @GetMapping("/searh/{residence}")
+    public ArrayList<MyDataDto> getMyDataByResidence(String residence){
+        ArrayList<MyData> myDatas = myDataService.findMyDatasByResidence(residence);
+        ArrayList<MyDataDto> rv = new ArrayList<>(myDatas.stream().map(myData -> myDataService.myDataToMyDataDto(myData)).collect(Collectors.toList()));
+        return rv;
+    }
+
+    @ResponseBody
+    @GetMapping("/searh/{vehicleAvailability}")
+    public ArrayList<MyDataDto> getMyDataByVehicleAvailability(Boolean vehicleAvailability){
+        ArrayList<MyData> myDatas = myDataService.findMyDatasByVehicleAvailability(vehicleAvailability);
+        ArrayList<MyDataDto> rv = new ArrayList<>(myDatas.stream().map(myData -> myDataService.myDataToMyDataDto(myData)).collect(Collectors.toList()));
+        return rv;
+    }
+
+    @ResponseBody
+    @GetMapping("/searh/{lifeStage}")
+    public ArrayList<MyDataDto> getMyDataByLifeStage(String lifeStage){
+        ArrayList<MyData> myDatas = myDataService.findMyDatasByLifeStage(lifeStage);
+        ArrayList<MyDataDto> rv = new ArrayList<>(myDatas.stream().map(myData -> myDataService.myDataToMyDataDto(myData)).collect(Collectors.toList()));
+        return rv;
+    }
+
+
+}
