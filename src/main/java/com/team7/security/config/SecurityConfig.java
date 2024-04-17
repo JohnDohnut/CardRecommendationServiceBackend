@@ -83,11 +83,9 @@ public class SecurityConfig {
                         .requestMatchers("/login", "register").anonymous()
                         .requestMatchers("/customer/**", "logout").authenticated()
                         .requestMatchers("/cards/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated());
 
-        http
-                .authorizeHttpRequests((req) -> req
-                        .requestMatchers("/admin/**").hasRole("ADMIN"));
         //AuthenticationManager()와 JWTUtil 인수 전달
         http
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, requestLogRepository), UsernamePasswordAuthenticationFilter.class);
