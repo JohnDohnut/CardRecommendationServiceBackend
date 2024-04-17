@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-@CrossOrigin(originPatterns = "http://localhost:3000")
+@CrossOrigin(originPatterns = "http://localhost:5173")
 @RestController
 @RequiredArgsConstructor
 @Slf4j
