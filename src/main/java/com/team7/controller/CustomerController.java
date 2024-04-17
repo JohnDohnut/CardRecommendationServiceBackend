@@ -3,7 +3,7 @@ package com.team7.controller;
 
 import com.team7.db.dto.CardDto;
 import com.team7.db.dto.CustomerInfoDTO;
-import com.team7.db.model.entity.Customer;
+import com.team7.db.model.entity.User;
 import com.team7.db.model.relationship.Ownership;
 import com.team7.security.utils.JWTUtil;
 import com.team7.service.entitiy.CustomerService;
@@ -33,7 +33,7 @@ public class CustomerController {
     public CustomerInfoDTO getCustomerInfo(HttpServletRequest request, HttpServletResponse response){
         String token = request.getHeader("Authorization").split(" ")[1];
         String customerAccountId = jwtUtil.getUsername(token);
-        Optional<Customer> customer = customerService.findCustomerByAccountId(customerAccountId);
+        Optional<User> customer = customerService.findUserByAccountId(customerAccountId);
         return customer.map(CustomerInfoDTO::new).orElse(null);
     }
 
@@ -44,7 +44,7 @@ public class CustomerController {
         String customerAccountId = jwtUtil.getUsername(token);
 
         ArrayList<Ownership> ownerships = ownershipService.getOwnershipsByCustomer(
-                customerService.findCustomerByAccountId(customerAccountId).get());
+                customerService.findUserByAccountId(customerAccountId).get());
         ArrayList<CardDto> cards = new ArrayList<>(ownerships
                 .stream()
                 .map(ownership -> new CardDto(ownership.getCard()))

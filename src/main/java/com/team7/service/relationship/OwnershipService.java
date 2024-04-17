@@ -1,7 +1,7 @@
 package com.team7.service.relationship;
 
 import com.team7.db.model.entity.Card;
-import com.team7.db.model.entity.Customer;
+import com.team7.db.model.entity.User;
 import com.team7.db.model.relationship.Ownership;
 import com.team7.db.repository.card.OwnershipRepository;
 import lombok.Getter;
@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class OwnershipService {
     private final OwnershipRepository ownershipRepository;
 
-    public ArrayList<Ownership> getOwnershipsByCustomer(Customer customer){
-        ArrayList<Ownership> rv = ownershipRepository.findOwnershipsByCustomer(customer);
+    public ArrayList<Ownership> getOwnershipsByCustomer(User user){
+        ArrayList<Ownership> rv = ownershipRepository.findOwnershipsByUser(user);
 
         return rv;
 

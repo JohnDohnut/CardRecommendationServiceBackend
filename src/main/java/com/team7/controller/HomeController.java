@@ -2,7 +2,7 @@
 
 
     import com.team7.db.dto.CustomerRegisterDto;
-    import com.team7.db.model.entity.Customer;
+    import com.team7.db.model.entity.User;
     import com.team7.db.model.token.Blacklist;
     import com.team7.db.repository.token.BlacklistRepository;
     import com.team7.service.entitiy.CustomerService;
@@ -48,17 +48,17 @@
 
             System.out.println(customerRegisterDto.toString());
 
-            if(customerService.findCustomerByAccountId(customerRegisterDto.getAccountId()).isPresent()){
+            if(customerService.findUserByAccountId(customerRegisterDto.getAccountId()).isPresent()){
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("아이디 중복.");
             }
-            if(customerService.findCustomerByEmail(customerRegisterDto.getEmail()).isPresent()){
+            if(customerService.findUserByEmail(customerRegisterDto.getEmail()).isPresent()){
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 존재하는 이메일.");
             }
-            if(customerService.findCustomerByPhone(customerRegisterDto.getPhone()).isPresent()){
+            if(customerService.findUserByPhone(customerRegisterDto.getPhone()).isPresent()){
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 존재하는 휴대폰 번호.");
             }
-            Customer newCustomer = new Customer(customerRegisterDto);
-            customerService.save(newCustomer);
+            User newUser = new User(customerRegisterDto);
+            customerService.save(newUser);
             return ResponseEntity.ok("회원가입 완료");
         }
 

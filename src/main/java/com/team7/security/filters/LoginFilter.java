@@ -15,11 +15,13 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.w3c.dom.ls.LSOutput;
 
 import java.util.Collection;
 import java.util.Iterator;
 
+@CrossOrigin()
 @RequiredArgsConstructor
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -36,10 +38,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         //클라이언트 요청에서 username, password 추출
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
+        System.out.println(request.toString());
         System.out.println("delivering payload ");
-        System.out.println(username==null);
-        System.out.println(password==null);
+        System.out.println(username);
+        System.out.println(password);
         //스프링 시큐리티에서 username과 password를 검증하기 위해서는 token에 담아야 함
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
 
@@ -61,7 +63,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         GrantedAuthority auth = iterator.next();
 
         String role = auth.getAuthority();
-
+        System.out.println("role : " + role);
         String accessToken = jwtUtil.createJwt(username, role, 60*1000*60L);
         String refreshToken = jwtUtil.createJwt(username, role, 60*1000*60L*10);
         response.addHeader("Authorization", "Bearer " + accessToken);

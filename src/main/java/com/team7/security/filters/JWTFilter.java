@@ -1,6 +1,6 @@
 package com.team7.security.filters;
 
-import com.team7.db.model.entity.Customer;
+import com.team7.db.model.entity.User;
 import com.team7.db.repository.customer.CustomerRepository;
 import com.team7.security.utils.JWTUtil;
 import com.team7.db.repository.token.BlacklistRepository;
@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -80,7 +79,7 @@ public class JWTFilter extends OncePerRequestFilter {
         //userEntity를 생성하여 값 set
 
         //UserDetails에 회원 정보 객체 담기
-        Customer customUserDetails = customerRepository.findCustomerByAccountId(username).get();
+        User customUserDetails = customerRepository.findUserByAccountId(username).get();
         System.out.println("constructing authToken");
         //스프링 시큐리   티 인증 토큰 생성
         Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());

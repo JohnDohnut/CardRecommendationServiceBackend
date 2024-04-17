@@ -1,6 +1,6 @@
 package com.team7.service.entitiy;
 
-import com.team7.db.model.entity.Customer;
+import com.team7.db.model.entity.User;
 import com.team7.db.model.entity.Mbti;
 import com.team7.db.repository.customer.CustomerRepository;
 import com.team7.db.repository.card.MbtiRepository;
@@ -16,41 +16,41 @@ public class CustomerService {
     private final MbtiRepository mbtiRepository;
     private final CustomerRepository customerRepository;
 
-    public Optional<Customer> findCustomerByCustomerUid(Long customerUid){
-        return customerRepository.findCustomerByCustomerUid(customerUid);
+    public Optional<User> findCustomerByCustomerUid(Long customerUid){
+        return customerRepository.findUserByUid(customerUid);
     }
 
-    public Optional<Customer> findCustomerByPhone(String phone){
-        return customerRepository.findCustomerByPhone(phone);
+    public Optional<User> findUserByPhone(String phone){
+        return customerRepository.findUserByPhone(phone);
     }
 
-    public Optional<Customer> findCustomerByEmail(String email){
-        return customerRepository.findCustomerByEmail(email);
+    public Optional<User> findUserByEmail(String email){
+        return customerRepository.findUserByEmail(email);
     }
 
 
-    public Optional<Customer> findCustomerByAccountId(String accountId){
-        return customerRepository.findCustomerByAccountId(accountId);
+    public Optional<User> findUserByAccountId(String accountId){
+        return customerRepository.findUserByAccountId(accountId);
     }
 
-    public ArrayList<Customer> findCustomerByAccountPassword(String accountPassword){
-        ArrayList<Customer> customers = customerRepository.findAllByAccountPassword(accountPassword);
-        return customers;
+    public ArrayList<User> findUserByAccountPassword(String accountPassword){
+        ArrayList<User> users = customerRepository.findAllByAccountPassword(accountPassword);
+        return users;
     }
 
-    public ArrayList<Customer> findCustomerByMbti(Mbti mbti){
-        ArrayList<Customer> customers = customerRepository.findAllByMbti(mbti);
-        return customers;
+    public ArrayList<User> findUserByMbti(Mbti mbti){
+        ArrayList<User> users = customerRepository.findAllByMbti(mbti);
+        return users;
     }
 
-    public ArrayList<Customer> findCustomerByMbtiValue(String mbtiValue){
+    public ArrayList<User> findUserByMbtiValue(String mbtiValue){
         Mbti mbti = mbtiRepository.findMbtiByValue(mbtiValue);
-        ArrayList<Customer> customers = customerRepository.findAllByMbti(mbti);
-        return customers;
+        ArrayList<User> users = customerRepository.findAllByMbti(mbti);
+        return users;
     }
 
-    public Customer save(Customer customer){
-        return customerRepository.save(customer);
+    public User save(User user){
+        return customerRepository.save(user);
     }
 
 }

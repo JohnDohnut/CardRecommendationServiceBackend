@@ -17,11 +17,13 @@ import java.util.List;
 @Setter
 @RequiredArgsConstructor
 @Entity
-@Table(name = "customer")
-public class Customer implements UserDetails {
+@Table(name = "user")
+public class User implements UserDetails {
+    private static final String ROLE_CUSTOMER = "ROLE_CUSTOMER";
+    private static final String ROLE_ADMIN = "ROLE_ADMIN";
 
-    public Customer (CustomerRegisterDto customerRegisterDto){
-        this.customerUid = null;
+    public User(CustomerRegisterDto customerRegisterDto){
+        this.uid = null;
         this.firstName = customerRegisterDto.getFirstName();
         this.lastName = customerRegisterDto.getLastName();
         this.birth = customerRegisterDto.getBirth();
@@ -31,13 +33,14 @@ public class Customer implements UserDetails {
         this.accountPassword = customerRegisterDto.getAccountPassword();
         this.accessToken = null;
         this.refreshToken = null;
+        this.role = ROLE_CUSTOMER;
         this.mbti = null;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_uid")
-    private Long customerUid;
+    @Column(name = "uid")
+    private Long uid;
 
     @Column(name = "first_name", length = 20)
     private String firstName;
@@ -66,13 +69,16 @@ public class Customer implements UserDetails {
     @Column(name = "access_token")
     private String accessToken;
 
+    @Column(name = "role")
+    private String role;
+
     @ManyToOne
     @JoinColumn(name = "mbti")
     private Mbti mbti;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("user"));
+        return List.of(new SimpleGrantedAuthority(this.role));
     }
 
     @Override

@@ -84,6 +84,10 @@ public class SecurityConfig {
                         .requestMatchers("/customer/**", "logout").authenticated()
                         .requestMatchers("/cards/**").permitAll()
                         .anyRequest().authenticated());
+
+        http
+                .authorizeHttpRequests((req) -> req
+                        .requestMatchers("/admin/**").hasRole("ADMIN"));
         //AuthenticationManager()와 JWTUtil 인수 전달
         http
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, requestLogRepository), UsernamePasswordAuthenticationFilter.class);
@@ -94,6 +98,7 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http
                 .logout(AbstractHttpConfigurer::disable);
+
         return http.build();
     }
 }

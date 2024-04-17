@@ -1,9 +1,8 @@
 package com.team7.service.account;
 
-import com.team7.db.model.entity.Customer;
+import com.team7.db.model.entity.User;
 import com.team7.db.repository.customer.CustomerRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,10 +15,10 @@ public class CustomerDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user;
-        Customer customer = customerRepository.findCustomerByAccountId(username)
+        org.springframework.security.core.userdetails.User user;
+        User customer = customerRepository.findUserByAccountId(username)
                 .orElseThrow(()-> new UsernameNotFoundException("No such user"));
-        user = new User(customer.getAccountId(), customer.getPassword(), customer.getAuthorities());
+        user = new org.springframework.security.core.userdetails.User(customer.getAccountId(), customer.getPassword(), customer.getAuthorities());
         return user;
     }
 

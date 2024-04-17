@@ -2,7 +2,7 @@ package com.team7.db.model.relationship;
 
 import com.team7.db.model.entity.Card;
 import com.team7.db.model.embededkey.OwnershipUid;
-import com.team7.db.model.entity.Customer;
+import com.team7.db.model.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +21,8 @@ public class Ownership {
 
     @ManyToOne
     @MapsId("customerUid")
-    @JoinColumn(name = "customer_uid")
-    private Customer customer;
+    @JoinColumn(name = "uid")
+    private User user;
 
     @ManyToOne
     @MapsId("cardUid")

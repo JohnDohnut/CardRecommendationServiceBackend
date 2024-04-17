@@ -1,7 +1,7 @@
 package com.team7.db.dto;
 
 
-import com.team7.db.model.entity.Customer;
+import com.team7.db.model.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,13 +19,13 @@ public class CustomerRegisterDto {
     private String accountId;
     private String accountPassword;
 
-    public CustomerRegisterDto(Customer customer){
-        this.firstName = customer.getFirstName();
-        this.lastName = customer.getLastName();
-        this.birth = customer.getBirth();
-        this.phone = customer.getPhone();
-        this.email = customer.getEmail();
-        this.accountId = customer.getAccountId();
-        this.accountPassword = customer.getAccountPassword();
+    public CustomerRegisterDto(User user){
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.birth = user.getBirth();
+        this.phone = user.getPhone();
+        this.email = user.getEmail();
+        this.accountId = user.getAccountId();
+        this.accountPassword = user.getAccountPassword();
     }
 }
