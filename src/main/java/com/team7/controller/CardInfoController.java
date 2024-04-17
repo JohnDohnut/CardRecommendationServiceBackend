@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-@CrossOrigin(originPatterns = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000", exposedHeaders = {"Authorization", "Refresh"})
 @RestController
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/cards")
+
 public class CardInfoController {
     public final CardService cardService;
     public final CardBenefitService cardBenefitService;

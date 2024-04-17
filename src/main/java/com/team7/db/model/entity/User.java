@@ -26,6 +26,7 @@ public class User implements UserDetails {
         this.uid = null;
         this.firstName = customerRegisterDto.getFirstName();
         this.lastName = customerRegisterDto.getLastName();
+        this.gender = customerRegisterDto.getGender();
         this.birth = customerRegisterDto.getBirth();
         this.phone = customerRegisterDto.getPhone();
         this.email = customerRegisterDto.getEmail();
@@ -47,6 +48,9 @@ public class User implements UserDetails {
 
     @Column(name = "last_name", length = 20)
     private String lastName;
+
+    @Column(name = "gender")
+    private String gender;
 
     @Column(length = 20)
     private String phone;

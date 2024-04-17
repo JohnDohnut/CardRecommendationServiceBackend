@@ -18,7 +18,7 @@ public class CustomerRegisterDto {
     private String email;
     private String accountId;
     private String accountPassword;
-
+    private String gender;
     public CustomerRegisterDto(User user){
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
@@ -27,5 +27,6 @@ public class CustomerRegisterDto {
         this.email = user.getEmail();
         this.accountId = user.getAccountId();
         this.accountPassword = user.getAccountPassword();
+        this.gender = user.getGender();
     }
 }

@@ -11,10 +11,7 @@ import com.team7.service.relationship.OwnershipService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -24,6 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/customer")
+@CrossOrigin(origins = "http://localhost:3000", exposedHeaders = {"Authorization", "Refresh"})
 @ResponseBody
 public class CustomerController {
     private final CustomerService customerService;
