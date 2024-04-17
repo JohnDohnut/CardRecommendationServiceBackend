@@ -68,6 +68,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String refreshToken = jwtUtil.createJwt(username, role, 60*1000*60L*10);
         response.addHeader("Authorization", "Bearer " + accessToken);
         response.addHeader("Refresh", "Bearer " + refreshToken);
+//        response.setHeader("Access-Control-Expose-Headers", "Authorization");
+//        response.addHeader("Access-Control-Expose-Headers", "Refresh");
 
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
