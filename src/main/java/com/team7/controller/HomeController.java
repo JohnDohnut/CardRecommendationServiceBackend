@@ -17,7 +17,6 @@
     import org.springframework.web.bind.annotation.*;
 
     @Slf4j
-    @CrossOrigin(origins = "http://localhost:3000", exposedHeaders = {"Authorization", "Refresh"})
     @RestController
     @RequiredArgsConstructor
     public class HomeController {

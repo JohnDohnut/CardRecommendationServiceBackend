@@ -24,4 +24,9 @@ public class AdminController {
         return;
     }
 
+    @GetMapping("/files/service/status")
+    public String s3ServiceStatus(){
+        return awsS3Service.serviceStatus();
+    }
+
 }

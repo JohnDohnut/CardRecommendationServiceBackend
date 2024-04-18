@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:3000", exposedHeaders = {"Authorization", "Refresh"})
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -22,7 +21,7 @@ public class CardInfoController {
     public final CardBenefitService cardBenefitService;
 
     @ResponseBody
-    @GetMapping("/")
+    @GetMapping()
     public ArrayList<CardDto> getCards(){
         return cardService.cardsToCardDtos(cardService.findAllCards());
     }

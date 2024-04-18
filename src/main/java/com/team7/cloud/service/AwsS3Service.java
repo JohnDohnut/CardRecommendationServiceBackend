@@ -27,6 +27,11 @@ public class AwsS3Service {
     @Value("team7-image-bucket")
     private String bucketName;
 
+    public String serviceStatus(){
+        System.out.println(amazonS3.getS3AccountOwner().getDisplayName());
+        return amazonS3.getS3AccountOwner().getDisplayName();
+    }
+
     public String uploadFile(String keyName, MultipartFile file) throws IOException{
         PutObjectResult putObjectResult = amazonS3.putObject(bucketName, keyName, file.getInputStream(),null);
         return URLDecoder.decode(amazonS3.getUrl(bucketName, keyName).toString(), StandardCharsets.UTF_8);

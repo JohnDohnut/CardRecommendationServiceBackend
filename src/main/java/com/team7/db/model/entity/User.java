@@ -27,7 +27,9 @@ public class User implements UserDetails {
         this.firstName = customerRegisterDto.getFirstName();
         this.lastName = customerRegisterDto.getLastName();
         this.gender = customerRegisterDto.getGender();
-        this.birth = customerRegisterDto.getBirth();
+        String _birth = customerRegisterDto.getBirth();
+        String[] _birth_strings = _birth.split("-");
+        this.birth = new Date(Integer.parseInt(_birth_strings[0]), Integer.parseInt(_birth_strings[1]), Integer.parseInt(_birth_strings[2]));
         this.phone = customerRegisterDto.getPhone();
         this.email = customerRegisterDto.getEmail();
         this.accountId = customerRegisterDto.getAccountId();
