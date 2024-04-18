@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/customer")
-@CrossOrigin(origins = "http://localhost:3000", exposedHeaders = {"Authorization", "Refresh"})
 @ResponseBody
 public class CustomerController {
     private final AwsS3Service awsS3Service;
