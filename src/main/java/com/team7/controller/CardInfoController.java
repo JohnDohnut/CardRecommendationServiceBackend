@@ -34,6 +34,7 @@ public class CardInfoController {
                 .stream()
                 .map(card -> new CardDto(card, awsS3Service))
                 .collect(Collectors.toList()));
+        System.out.println(cards.get(0).getImage());
         return cards;
     }
 
