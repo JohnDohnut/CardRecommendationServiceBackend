@@ -1,6 +1,7 @@
 package com.team7.db.dto;
 
 
+import com.team7.cloud.service.AwsS3Service;
 import com.team7.db.model.entity.Card;
 import com.team7.db.model.entity.CardVendor;
 import com.team7.db.model.entity.Mbti;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 @Setter
 
 public class CardDto {
+
     private Long cardUid;
 
     private String name;
@@ -24,7 +26,7 @@ public class CardDto {
 
     private int available;
 
-    private byte[] image;
+    private String image;
 
     private CardVendor cardVendor;
 
@@ -33,13 +35,13 @@ public class CardDto {
     ArrayList<BenefitDto> benefits;
 
 
-    public CardDto(Card card){
+    public CardDto(Card card, AwsS3Service awsS3Service){
         this.cardUid = card.getCardUid();
         this.name = card.getName();
         this.type = card.getType();
         this.annualFee = card.getAnnualFee();
         this.available = card.getAvailable();
-        this.image = card.getImage();
+        this.image = awsS3Service.getFilePresignedURL(card.getImage());
         this.cardVendor = card.getCardVendor();
         this.mbti = card.getMbti();
         benefits = new ArrayList<>(card.getCardBenefits()

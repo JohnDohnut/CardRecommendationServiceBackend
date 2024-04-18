@@ -29,4 +29,15 @@ public class AdminController {
         return awsS3Service.serviceStatus();
     }
 
+    @GetMapping("/files/download/{keyName}")
+    public byte[] downloadImage(@PathVariable String keyName) throws IOException {
+        return awsS3Service.getFile(keyName).getObjectContent().readAllBytes();
+    }
+
+    @GetMapping("/files/download/presigned/{keyName}")
+    @ResponseBody
+    public String downloadPresignedImageURL(@PathVariable String keyName) throws IOException{
+        return awsS3Service.getFilePresignedURL(keyName);
+    }
+
 }

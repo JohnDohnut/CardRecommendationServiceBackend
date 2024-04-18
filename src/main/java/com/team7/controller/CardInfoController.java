@@ -1,5 +1,6 @@
 package com.team7.controller;
 
+import com.team7.cloud.service.AwsS3Service;
 import com.team7.db.dto.CardDto;
 import com.team7.db.model.entity.Card;
 import com.team7.service.relationship.CardBenefitService;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 public class CardInfoController {
     public final CardService cardService;
     public final CardBenefitService cardBenefitService;
-
+    public final AwsS3Service awsS3Service;
     @ResponseBody
     @GetMapping()
     public ArrayList<CardDto> getCards(){
@@ -31,7 +32,7 @@ public class CardInfoController {
     public ArrayList<CardDto> getCreditCards(){
         ArrayList<CardDto> cards = new ArrayList<>(cardService.findCardsByType("신용")
                 .stream()
-                .map(card -> new CardDto(card))
+                .map(card -> new CardDto(card, awsS3Service))
                 .collect(Collectors.toList()));
         return cards;
     }
@@ -41,7 +42,7 @@ public class CardInfoController {
     public ArrayList<CardDto> getPrepaidCards(){
         ArrayList<CardDto> cards = new ArrayList<>(cardService.findCardsByType("체크")
                 .stream()
-                .map(card -> new CardDto(card))
+                .map(card -> new CardDto(card, awsS3Service))
                 .collect(Collectors.toList()));
         return cards;
     }
@@ -51,7 +52,7 @@ public class CardInfoController {
     @GetMapping("/card/{id}")
     public CardDto getCardByUid(@PathVariable Long id){
         Card card = cardService.findCardByCardUid(id);
-        CardDto rv = new CardDto(card);
+        CardDto rv = new CardDto(card, awsS3Service);
         return rv;
     }
 

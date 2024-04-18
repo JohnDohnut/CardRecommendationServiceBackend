@@ -1,6 +1,7 @@
 package com.team7.controller;
 
 
+import com.team7.cloud.service.AwsS3Service;
 import com.team7.db.dto.CardDto;
 import com.team7.db.dto.CustomerInfoDTO;
 import com.team7.db.model.entity.User;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:3000", exposedHeaders = {"Authorization", "Refresh"})
 @ResponseBody
 public class CustomerController {
+    private final AwsS3Service awsS3Service;
     private final CustomerService customerService;
     private final OwnershipService ownershipService;
     private final JWTUtil jwtUtil;
@@ -45,7 +47,7 @@ public class CustomerController {
                 customerService.findUserByAccountId(customerAccountId).get());
         ArrayList<CardDto> cards = new ArrayList<>(ownerships
                 .stream()
-                .map(ownership -> new CardDto(ownership.getCard()))
+                .map(ownership -> new CardDto(ownership.getCard(), awsS3Service))
                 .collect(Collectors.toList()));
         return cards;
     }

@@ -34,7 +34,7 @@ public class Card {
 
     @Lob
     @Column(name = "image")
-    private byte[] image;
+    private String image;
 
     @ManyToOne
     @JoinColumn(name = "card_vendor", referencedColumnName = "card_vendor_uid", nullable = false)

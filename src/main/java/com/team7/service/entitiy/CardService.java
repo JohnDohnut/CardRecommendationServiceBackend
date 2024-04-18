@@ -1,5 +1,6 @@
 package com.team7.service.entitiy;
 
+import com.team7.cloud.service.AwsS3Service;
 import com.team7.db.dto.CardDto;
 import com.team7.db.model.entity.Card;
 import com.team7.db.model.entity.CardVendor;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CardService {
     private final CardReopository cardRepository;
-
+    private final AwsS3Service awsS3Service;
     public Card findCardByCardUid(Long uid){
         Card rv = cardRepository.findCardByCardUid(uid);
         return rv;
@@ -52,11 +53,11 @@ public class CardService {
 
     public ArrayList<CardDto> cardsToCardDtos(ArrayList<Card> cards){
 
-        return new ArrayList<>(cards.stream().map(card -> new CardDto(card)).collect(Collectors.toList()));
+        return new ArrayList<>(cards.stream().map(card -> new CardDto(card, awsS3Service)).collect(Collectors.toList()));
     }
 
     public CardDto cardToCardDto(Card card){
-        return new CardDto(card);
+        return new CardDto(card, awsS3Service);
     }
 
     public ArrayList<Card> searchCardsByName(String name){
