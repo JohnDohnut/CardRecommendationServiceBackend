@@ -1,16 +1,27 @@
 package com.team7.controller.admin;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.team7.cloud.service.AwsS3Service;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/admin")
+@RequiredArgsConstructor
 public class AdminController {
-
+    private final AwsS3Service awsS3Service;
     @GetMapping("/home")
     public void getHome(){
 
     }
+
+    @PostMapping("/files/upload")
+    public void postImage(@RequestParam MultipartFile file, @RequestParam String keyName) throws IOException {
+        awsS3Service.uploadFile(keyName, file);
+        return;
+    }
+
 }

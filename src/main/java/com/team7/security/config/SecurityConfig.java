@@ -80,7 +80,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/", "/home").permitAll()
-                        .requestMatchers("/login", "register").anonymous()
+                        .requestMatchers("/login", "/register").anonymous()
                         .requestMatchers("/customer/**", "logout").authenticated()
                         .requestMatchers("/cards/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
