@@ -17,7 +17,7 @@
     import org.springframework.web.bind.annotation.*;
 
     @Slf4j
-    @CrossOrigin(originPatterns = "http://localhost:3000")
+    @CrossOrigin(originPatterns = "http://localhost:5173")
     @RestController
     @RequiredArgsConstructor
     public class HomeController {

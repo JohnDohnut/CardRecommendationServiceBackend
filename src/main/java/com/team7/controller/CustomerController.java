@@ -3,10 +3,13 @@ package com.team7.controller;
 
 import com.team7.db.dto.CardDto;
 import com.team7.db.dto.CustomerInfoDTO;
+import com.team7.db.dto.MyDataInfoDTO;
 import com.team7.db.model.entity.Customer;
+import com.team7.db.model.entity.MyData;
 import com.team7.db.model.relationship.Ownership;
 import com.team7.security.utils.JWTUtil;
 import com.team7.service.entitiy.CustomerService;
+import com.team7.service.entitiy.MyDataService;
 import com.team7.service.relationship.OwnershipService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,6 +31,7 @@ import java.util.stream.Collectors;
 public class CustomerController {
     private final CustomerService customerService;
     private final OwnershipService ownershipService;
+    private final MyDataService myDataSerice;
     private final JWTUtil jwtUtil;
     @GetMapping("/myInfo")
     public CustomerInfoDTO getCustomerInfo(HttpServletRequest request, HttpServletResponse response){
@@ -50,6 +54,17 @@ public class CustomerController {
                 .map(ownership -> new CardDto(ownership.getCard()))
                 .collect(Collectors.toList()));
         return cards;
+    }
+
+    @GetMapping("/myData")
+    public MyDataInfoDTO getCustomerMyData(HttpServletRequest request, HttpServletResponse response){
+        String token = request.getHeader("Authorization").split(" ")[1];
+        String customerAccountId = jwtUtil.getUsername(token);
+        Optional<Customer> customer = customerService.findCustomerByAccountId(customerAccountId);
+//        return customer.map(CustomerInfoDTO::new).orElse(null);
+        Optional<MyData> myData = myDataSerice.findMyDataByCustomer(customer.get());
+        return myData.map(MyDataInfoDTO::new).orElse(null);
+
     }
 }
 

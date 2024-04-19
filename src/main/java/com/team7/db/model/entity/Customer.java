@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 @RequiredArgsConstructor
 @Entity
-@Table(name = "customer")
+@Table(name = "user")
 public class Customer implements UserDetails {
 
     public Customer (CustomerRegisterDto customerRegisterDto){
@@ -36,7 +36,8 @@ public class Customer implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_uid")
+//    @Column(name = "customer_uid")
+    @Column(name = "uid")
     private Long customerUid;
 
     @Column(name = "first_name", length = 20)
