@@ -84,6 +84,7 @@ public class SecurityConfig {
                         .requestMatchers("/customer/**", "logout").authenticated()
                         .requestMatchers("/cards/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/myDataInfo/**").permitAll()
                         .anyRequest().authenticated());
 
         //AuthenticationManager()와 JWTUtil 인수 전달
