@@ -34,7 +34,7 @@ public class MyDataInfoController {
 
     @ResponseBody
     @GetMapping("/searh/{residence}")
-    public ArrayList<MyDataDto> getMyDataByResidence(String residence){
+    public ArrayList<MyDataDto> getMyDataByResidence(@PathVariable String residence){
         ArrayList<MyData> myDatas = myDataService.findMyDatasByResidence(residence);
         ArrayList<MyDataDto> rv = new ArrayList<>(myDatas.stream().map(myData -> myDataService.myDataToMyDataDto(myData)).collect(Collectors.toList()));
         return rv;
@@ -42,7 +42,7 @@ public class MyDataInfoController {
 
     @ResponseBody
     @GetMapping("/searh/{vehicleAvailability}")
-    public ArrayList<MyDataDto> getMyDataByVehicleAvailability(Boolean vehicleAvailability){
+    public ArrayList<MyDataDto> getMyDataByVehicleAvailability(@PathVariable Boolean vehicleAvailability){
         ArrayList<MyData> myDatas = myDataService.findMyDatasByVehicleAvailability(vehicleAvailability);
         ArrayList<MyDataDto> rv = new ArrayList<>(myDatas.stream().map(myData -> myDataService.myDataToMyDataDto(myData)).collect(Collectors.toList()));
         return rv;
@@ -50,7 +50,7 @@ public class MyDataInfoController {
 
     @ResponseBody
     @GetMapping("/searh/{lifeStage}")
-    public ArrayList<MyDataDto> getMyDataByLifeStage(String lifeStage){
+    public ArrayList<MyDataDto> getMyDataByLifeStage(@PathVariable String lifeStage){
         ArrayList<MyData> myDatas = myDataService.findMyDatasByLifeStage(lifeStage);
         ArrayList<MyDataDto> rv = new ArrayList<>(myDatas.stream().map(myData -> myDataService.myDataToMyDataDto(myData)).collect(Collectors.toList()));
         return rv;
