@@ -38,7 +38,7 @@
             return "index.html";
         }
 
-        @GetMapping("/login")
+        @GetMapping("/role")
         public String login(HttpServletRequest request, HttpServletResponse response){
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             System.out.println("entered login");

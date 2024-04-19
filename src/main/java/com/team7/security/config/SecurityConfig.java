@@ -79,7 +79,7 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/", "/home").permitAll()
+                        .requestMatchers("/", "/home", "/role").permitAll()
                         .requestMatchers("/login", "/register").anonymous()
                         .requestMatchers("/customer/**", "logout").authenticated()
                         .requestMatchers("/cards/**").permitAll()
