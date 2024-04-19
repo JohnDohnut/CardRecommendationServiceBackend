@@ -26,7 +26,7 @@ public class MyDataInfoController {
 
     @ResponseBody
     @GetMapping("/searh/{age}")
-    public ArrayList<MyDataDto> getMyDataByAge(int age){
+    public ArrayList<MyDataDto> getMyDataByAge(@PathVariable int age){
         ArrayList<MyData> myDatas = myDataService.findMyDatasByAge(age);
         ArrayList<MyDataDto> rv = new ArrayList<>(myDatas.stream().map(myData -> myDataService.myDataToMyDataDto(myData)).collect(Collectors.toList()));
         return rv;
