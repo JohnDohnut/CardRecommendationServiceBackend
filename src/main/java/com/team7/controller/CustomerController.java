@@ -2,6 +2,7 @@ package com.team7.controller;
 
 
 import com.team7.cloud.service.AwsS3Service;
+import com.team7.controller.util.ControllerUtil;
 import com.team7.db.dto.CardDto;
 import com.team7.db.dto.CustomerInfoDTO;
 import com.team7.db.dto.MyDataInfoDTO;
@@ -30,21 +31,27 @@ public class CustomerController {
     private final AwsS3Service awsS3Service;
     private final CustomerService customerService;
     private final OwnershipService ownershipService;
-    private final MyDataService myDataSerice;
-    private final JWTUtil jwtUtil;
+    private final MyDataService myDataService;
+
+    private final ControllerUtil controllerUtil;
+
+
+
     @GetMapping("/myInfo")
     public CustomerInfoDTO getCustomerInfo(HttpServletRequest request, HttpServletResponse response){
-        String token = request.getHeader("Authorization").split(" ")[1];
-        String customerAccountId = jwtUtil.getUsername(token);
+        String customerAccountId = controllerUtil.getUserNameFromHeader(request);
         Optional<User> customer = customerService.findUserByAccountId(customerAccountId);
         return customer.map(CustomerInfoDTO::new).orElse(null);
     }
 
+    @PostMapping("/myInfo/modify/email")
+    public String CustomerInfoDTO(HttpServletRequest request, HttpServletResponse response){
+        return null;
+    }
+
     @GetMapping("/myCards")
     public ArrayList<CardDto> getCustomerCards(HttpServletRequest request, HttpServletResponse response) {
-        String token = request.getHeader("Authorization").split(" ")[1];
-
-        String customerAccountId = jwtUtil.getUsername(token);
+        String customerAccountId = controllerUtil.getUserNameFromHeader(request);
 
         ArrayList<Ownership> ownerships = ownershipService.getOwnershipsByCustomer(
                 customerService.findUserByAccountId(customerAccountId).get());
@@ -57,11 +64,9 @@ public class CustomerController {
 
     @GetMapping("/myData")
     public MyDataInfoDTO getCustomerMyData(HttpServletRequest request, HttpServletResponse response){
-        String token = request.getHeader("Authorization").split(" ")[1];
-        String customerAccountId = jwtUtil.getUsername(token);
+        String customerAccountId = controllerUtil.getUserNameFromHeader(request);
         Optional<User> customer = customerService.findUserByAccountId(customerAccountId);
-//        return customer.map(CustomerInfoDTO::new).orElse(null);
-        Optional<MyData> myData = myDataSerice.findMyDataByCustomer(customer.get());
+        Optional<MyData> myData = myDataService.findMyDataByCustomer(customer.get());
         return myData.map(MyDataInfoDTO::new).orElse(null);
 
     }

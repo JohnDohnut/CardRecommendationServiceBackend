@@ -2,6 +2,7 @@ package com.team7.controller.admin;
 
 
 import com.team7.cloud.service.AwsS3Service;
+import com.team7.service.entitiy.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,9 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AdminController {
     private final AwsS3Service awsS3Service;
+    private final CustomerService customerService;
+
+    
     @GetMapping("/home")
     public void getHome(){
 
