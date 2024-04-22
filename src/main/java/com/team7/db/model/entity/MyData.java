@@ -31,7 +31,7 @@ public class MyData {
 
     @OneToOne
 //    @JoinColumn(name = "customer", referencedColumnName = "customer_uid", nullable = false)
-    @JoinColumn(name = "user", referencedColumnName = "uid", nullable = false)
+    @JoinColumn(name = "customer", referencedColumnName = "uid", nullable = false)
     private User user;
 
 }

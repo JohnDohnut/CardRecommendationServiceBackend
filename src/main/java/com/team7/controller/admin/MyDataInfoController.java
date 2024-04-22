@@ -1,4 +1,4 @@
-package com.team7.controller;
+package com.team7.controller.admin;
 
 import com.team7.db.dto.MyDataDto;
 import com.team7.db.model.entity.MyData;
@@ -13,10 +13,9 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/myDataInfo")
+@RequestMapping("admin/mydata")
 public class MyDataInfoController {
     public final MyDataService myDataService;
-
     @ResponseBody
     @GetMapping("/")
     public ArrayList<MyDataDto> getMyDatas(){

@@ -3,13 +3,18 @@ package com.team7.controller;
 import com.team7.cloud.service.AwsS3Service;
 import com.team7.db.dto.CardDto;
 import com.team7.db.model.entity.Card;
+import com.team7.db.model.entity.Mbti;
+import com.team7.service.entitiy.MbtiService;
 import com.team7.service.relationship.CardBenefitService;
 import com.team7.service.entitiy.CardService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,6 +26,7 @@ public class CardInfoController {
     public final CardService cardService;
     public final CardBenefitService cardBenefitService;
     public final AwsS3Service awsS3Service;
+    public final MbtiService mbtiService;
     @ResponseBody
     @GetMapping()
     public ArrayList<CardDto> getCards(){
@@ -34,7 +40,7 @@ public class CardInfoController {
                 .stream()
                 .map(card -> new CardDto(card, awsS3Service))
                 .collect(Collectors.toList()));
-        System.out.println(cards.get(0).getImage());
+        Collections.shuffle(cards);
         return cards;
     }
 
@@ -45,6 +51,7 @@ public class CardInfoController {
                 .stream()
                 .map(card -> new CardDto(card, awsS3Service))
                 .collect(Collectors.toList()));
+        Collections.shuffle(cards);
         return cards;
     }
 
@@ -66,6 +73,26 @@ public class CardInfoController {
         rv = new ArrayList<>(cards.stream().map(card -> cardService.cardToCardDto(card)).collect(Collectors.toList()));
         return rv;
 
+    }
+
+    @ResponseBody
+    @GetMapping("/mbti/{mbti}")
+    public ArrayList<CardDto> getMbtiCards(@PathVariable String mbti, HttpServletResponse response){
+
+        ArrayList<CardDto> rv;
+        try {
+            mbti = mbti.toUpperCase();
+            Mbti mbtiInstance = mbtiService.findMbtiByMbtiValue(mbti);
+            ArrayList<Card> cards = cardService.findCardsByMbti(mbtiInstance);
+
+            rv =new ArrayList<>(cards.stream().map(card -> cardService.cardToCardDto(card)).collect(Collectors.toList()));
+            Collections.shuffle(rv);
+            return rv;
+        }
+        catch(Exception e){
+            response.setStatus(HttpStatus.FORBIDDEN.value());
+            return null;
+        }
 
     }
 }

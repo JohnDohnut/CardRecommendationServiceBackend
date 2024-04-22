@@ -6,11 +6,13 @@ import com.team7.controller.util.ControllerUtil;
 import com.team7.db.dto.CardDto;
 import com.team7.db.dto.CustomerInfoDTO;
 import com.team7.db.dto.MyDataInfoDTO;
+import com.team7.db.model.entity.Mbti;
 import com.team7.db.model.entity.MyData;
 import com.team7.db.model.entity.User;
 import com.team7.db.model.relationship.Ownership;
 import com.team7.security.utils.JWTUtil;
 import com.team7.service.entitiy.CustomerService;
+import com.team7.service.entitiy.MbtiService;
 import com.team7.service.entitiy.MyDataService;
 import com.team7.service.relationship.OwnershipService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -32,7 +35,7 @@ public class CustomerController {
     private final CustomerService customerService;
     private final OwnershipService ownershipService;
     private final MyDataService myDataService;
-
+    private final MbtiService mbtiService;
     private final ControllerUtil controllerUtil;
 
 
@@ -59,6 +62,7 @@ public class CustomerController {
                 .stream()
                 .map(ownership -> new CardDto(ownership.getCard(), awsS3Service))
                 .collect(Collectors.toList()));
+        Collections.shuffle(cards);
         return cards;
     }
 
@@ -70,5 +74,18 @@ public class CustomerController {
         return myData.map(MyDataInfoDTO::new).orElse(null);
 
     }
+
+    @PostMapping("/updateMbti")
+    public void updateCustomerMbti(HttpServletRequest request, HttpServletResponse response){
+        String customerAccoundId = controllerUtil.getUserNameFromHeader(request);
+        User customer = customerService.findUserByAccountId(customerAccoundId).get();
+        Mbti mbti = mbtiService.findMbtiByMbtiValue(request.getParameter("Mbti"));
+        customer.setMbti(mbti);
+        customerService.save(customer);
+        return;
+
+    }
+
+
 }
 

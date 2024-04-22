@@ -48,5 +48,5 @@ public class Card {
     List<CardBenefit> cardBenefits;
 
 
-    // 생성자, getter, setter...
+    // 생성자, getter, setter...1
 }

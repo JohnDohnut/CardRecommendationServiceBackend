@@ -2,12 +2,17 @@ package com.team7.controller.admin;
 
 
 import com.team7.cloud.service.AwsS3Service;
+import com.team7.db.dto.MyDataDto;
+import com.team7.db.model.entity.MyData;
 import com.team7.service.entitiy.CustomerService;
+import com.team7.service.entitiy.MyDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/admin")
@@ -15,6 +20,7 @@ import java.io.IOException;
 public class AdminController {
     private final AwsS3Service awsS3Service;
     private final CustomerService customerService;
+    public final MyDataService myDataService;
 
     
     @GetMapping("/home")
@@ -43,5 +49,7 @@ public class AdminController {
     public String downloadPresignedImageURL(@PathVariable String keyName) throws IOException{
         return awsS3Service.getFilePresignedURL(keyName);
     }
+
+
 
 }
