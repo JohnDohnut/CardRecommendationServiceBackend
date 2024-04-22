@@ -39,7 +39,7 @@
         }
 
         @GetMapping("/role")
-        public String login(HttpServletRequest request, HttpServletResponse response){
+        public String getRole(HttpServletRequest request, HttpServletResponse response){
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             System.out.println("entered login");
             return new ArrayList<GrantedAuthority>(authentication.getAuthorities()).get(0).getAuthority();

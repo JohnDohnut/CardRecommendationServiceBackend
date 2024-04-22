@@ -47,10 +47,7 @@ public class CustomerController {
         return customer.map(CustomerInfoDTO::new).orElse(null);
     }
 
-    @PostMapping("/myInfo/modify/email")
-    public String CustomerInfoDTO(HttpServletRequest request, HttpServletResponse response){
-        return null;
-    }
+
 
     @GetMapping("/myCards")
     public ArrayList<CardDto> getCustomerCards(HttpServletRequest request, HttpServletResponse response) {
@@ -75,7 +72,7 @@ public class CustomerController {
 
     }
 
-    @PostMapping("/updateMbti")
+    @PostMapping("/modify/mbti")
     public void updateCustomerMbti(HttpServletRequest request, HttpServletResponse response){
         String customerAccoundId = controllerUtil.getUserNameFromHeader(request);
         User customer = customerService.findUserByAccountId(customerAccoundId).get();
@@ -86,6 +83,14 @@ public class CustomerController {
 
     }
 
+    @PostMapping("/myInfo/modify/email")
+    public void CustomerInfoDTO(HttpServletRequest request, HttpServletResponse response){
 
+        String customerAccountId = controllerUtil.getUserNameFromHeader(request);
+        User user = customerService.findUserByAccountId(customerAccountId).get();
+        user.setEmail(request.getParameter("email"));
+        return;
+
+    }
 }
 
