@@ -4,6 +4,7 @@ package com.team7.controller.admin;
 import com.team7.cloud.service.AwsS3Service;
 import com.team7.db.dto.MyDataDto;
 import com.team7.db.model.entity.MyData;
+import com.team7.db.model.entity.User;
 import com.team7.service.entitiy.CustomerService;
 import com.team7.service.entitiy.MyDataService;
 import lombok.RequiredArgsConstructor;
@@ -51,9 +52,21 @@ public class AdminController {
     }
 
     @DeleteMapping ("/users/delete/{accountId}")
-    public void deleteUser(@PathVariable String accoundId){
-        return customerService.
-
+    public void deleteUser(@PathVariable String accountId){
+        customerService.deleteByAccountId(accountId);
     }
+
+    @GetMapping("/users/all")
+    @ResponseBody
+    public ArrayList<User> getAllUsers(){
+        return customerService.findAllUsers();
+    }
+
+    @GetMapping("/users/customers")
+    @ResponseBody
+    public ArrayList<User> getCustomers(){
+        return customerService.findAllCustomer();
+    }
+
 
 }

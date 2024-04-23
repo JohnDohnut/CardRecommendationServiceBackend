@@ -28,5 +28,9 @@ public interface CustomerRepository extends JpaRepository<User, Long> {
 
     public Optional<User> findUserByAccountId(String accountId);
 
+    public ArrayList<User> findAllByRole(String role);
+
+
+
     public void deleteUserByAccountId(String accountId);
 }

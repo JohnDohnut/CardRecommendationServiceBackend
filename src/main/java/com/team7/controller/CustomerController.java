@@ -92,5 +92,12 @@ public class CustomerController {
         return;
 
     }
+
+    @PostMapping("/myInfo/modify/password")
+    public void updateCustomerPassword(HttpServletRequest request, HttpServletResponse response){
+        String customerAccountId = controllerUtil.getUserNameFromHeader(request);
+        User user = customerService.findUserByAccountId(customerAccountId).get();
+        user.setAccountPassword(request.getParameter("password"));
+    }
 }
 

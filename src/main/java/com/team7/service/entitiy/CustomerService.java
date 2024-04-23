@@ -56,4 +56,14 @@ public class CustomerService {
     public void deleteByAccountId(String accountId){
         customerRepository.deleteUserByAccountId(accountId);
     }
+
+    public ArrayList<User> findAllCustomer(){
+        return customerRepository.findAllByRole("ROLE_CUSTOMER");
+    }
+
+    public ArrayList<User> findAllUsers(){
+        return new ArrayList<>(customerRepository.findAll());
+    }
+
+
 }
