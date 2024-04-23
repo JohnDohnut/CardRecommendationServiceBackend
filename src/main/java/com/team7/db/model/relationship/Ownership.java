@@ -21,7 +21,7 @@ public class Ownership {
 
     @ManyToOne
     @MapsId("customerUid")
-    @JoinColumn(name = "uid")
+    @JoinColumn(name = "customer_uid")
     private User user;
 
     @ManyToOne

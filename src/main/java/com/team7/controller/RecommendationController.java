@@ -1,7 +1,10 @@
 package com.team7.controller;
 
 import com.team7.controller.util.ControllerUtil;
+import com.team7.db.dto.CardDto;
 import com.team7.db.model.entity.Mbti;
+import com.team7.db.model.entity.MyData;
+import com.team7.db.model.entity.User;
 import com.team7.service.entitiy.CustomerService;
 import com.team7.service.entitiy.MyDataService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.ArrayList;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/recommend")
@@ -56,9 +62,25 @@ public class RecommendationController {
 //
 //        if(mydata.isPresent()){
 //            String lifeStage = mydata.get().getLifeStage();
+//            if (lifeStage == "UNI"){
+//
+//            }
+//            else if(lifeStage == "CHILD_BABY" || lifeStage == "CHILD_TEEN" || lifeStage == "NEW_WED"){
+//
+//
+//            }
+//
+//            else if(lifeStage == "NEW_JOB"){
+//
+//            }
+//
+//
+//
 //
 //
 //        }
-//
+//        else{
+//            return null;
+//        }
 //    }
 }
