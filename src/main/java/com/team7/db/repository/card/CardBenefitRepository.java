@@ -17,5 +17,5 @@ public interface CardBenefitRepository extends JpaRepository<CardBenefit, CardBe
 
     public ArrayList<CardBenefit> findCardBenefitsByBenefit(Benefit benefit);
 
-
+    public ArrayList<CardBenefit> findCardBenefitsByBenefitIn(ArrayList<Benefit> benefits);
 }

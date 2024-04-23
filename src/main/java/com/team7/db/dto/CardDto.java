@@ -6,15 +6,18 @@ import com.team7.db.model.entity.Card;
 import com.team7.db.model.entity.CardVendor;
 import com.team7.db.model.entity.Mbti;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 @Getter
 @Setter
-
 public class CardDto {
+
 
     private Long cardUid;
 

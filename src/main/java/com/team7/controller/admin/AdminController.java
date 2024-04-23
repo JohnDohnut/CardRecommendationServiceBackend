@@ -50,6 +50,10 @@ public class AdminController {
         return awsS3Service.getFilePresignedURL(keyName);
     }
 
+    @DeleteMapping ("/users/delete/{accountId}")
+    public void deleteUser(@PathVariable String accoundId){
+        return customerService.
 
+    }
 
 }

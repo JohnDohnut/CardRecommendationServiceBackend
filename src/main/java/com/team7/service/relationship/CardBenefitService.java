@@ -20,6 +20,7 @@ public class CardBenefitService {
     private final BenefitRepository benefitRepository;
     private final CardReopository cardReopository;
 
+
     public ArrayList<CardBenefit> getCardBenefitsByCard(Card card){
 
         ArrayList<CardBenefit> rv = cardBenefitRepository.findCardBenefitsByCard(card);
@@ -31,5 +32,11 @@ public class CardBenefitService {
         return rv;
     }
 
+    public ArrayList<CardBenefit> getCardBenefitByBenefitOns(ArrayList<String> benefitOns){
+        ArrayList<Benefit> benefits = benefitRepository.findBenefitsByBenefitOnIn(benefitOns);
+        ArrayList<CardBenefit> cardBenefits = cardBenefitRepository.findCardBenefitsByBenefitIn(benefits);
+        return cardBenefits;
+
+    }
 
 }

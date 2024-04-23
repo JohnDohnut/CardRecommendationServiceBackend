@@ -12,6 +12,8 @@ public interface BenefitRepository extends JpaRepository<Benefit, Long> {
 
     public ArrayList<Benefit> findBenefitsByBenefitOn(String benefitOn);
 
+    public ArrayList<Benefit> findBenefitsByBenefitOnIn(ArrayList<String> benefitOns);
+
     public ArrayList<Benefit> findBenefitsByType(String type);
 
     public ArrayList<Benefit> findBenefitsByUnit(String unit);

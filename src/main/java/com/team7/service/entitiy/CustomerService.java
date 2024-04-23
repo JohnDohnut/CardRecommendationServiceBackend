@@ -53,4 +53,7 @@ public class CustomerService {
         return customerRepository.save(user);
     }
 
+    public void deleteByAccountId(String accountId){
+        customerRepository.deleteUserByAccountId(accountId);
+    }
 }
