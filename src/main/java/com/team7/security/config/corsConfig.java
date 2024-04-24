@@ -1,5 +1,6 @@
 package com.team7.security.config;
 
+import com.amazonaws.HttpMethod;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;

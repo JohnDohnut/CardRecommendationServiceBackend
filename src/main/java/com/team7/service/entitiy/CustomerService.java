@@ -6,6 +6,7 @@ import com.team7.db.repository.customer.CustomerRepository;
 import com.team7.db.repository.card.MbtiRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -16,7 +17,7 @@ public class CustomerService {
     private final MbtiRepository mbtiRepository;
     private final CustomerRepository customerRepository;
 
-    public Optional<User> findCustomerByCustomerUid(Long customerUid){
+    public Optional<User> findUserByUid(Long customerUid){
         return customerRepository.findUserByUid(customerUid);
     }
 
@@ -53,8 +54,14 @@ public class CustomerService {
         return customerRepository.save(user);
     }
 
+    @Transactional
     public void deleteByAccountId(String accountId){
         customerRepository.deleteUserByAccountId(accountId);
+    }
+
+    @Transactional
+    public void deleteByUid(Long uid){
+        customerRepository.deleteUserByUid(uid);
     }
 
     public ArrayList<User> findAllCustomer(){

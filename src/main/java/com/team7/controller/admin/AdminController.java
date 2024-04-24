@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -51,9 +52,10 @@ public class AdminController {
         return awsS3Service.getFilePresignedURL(keyName);
     }
 
-    @DeleteMapping ("/users/delete/{accountId}")
-    public void deleteUser(@PathVariable String accountId){
-        customerService.deleteByAccountId(accountId);
+    @DeleteMapping ("/users/delete/{uid}")
+    public void delUser(@PathVariable Long uid){
+        customerService.deleteByUid(uid);
+
     }
 
     @GetMapping("/users/all")
@@ -67,10 +69,14 @@ public class AdminController {
     public ArrayList<User> getCustomers(){
         return customerService.findAllCustomer();
     }
-//
-//    @PostMapping("/users/user/{uid}/modify")
-//    @RequestBody
-//    public void modifyCustomerInformation(@PathVariable Long uid, ){
-//
-//    }
+
+    @GetMapping("/users/user/{id}")
+    @ResponseBody
+    public User getUser(@PathVariable Long id){
+        Optional<User> user = customerService.findUserByUid(id);
+        if(user.isPresent()){
+            return user.get();
+        }
+        return null;
+    }
 }

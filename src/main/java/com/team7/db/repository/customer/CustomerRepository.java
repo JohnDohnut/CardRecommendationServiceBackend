@@ -33,4 +33,5 @@ public interface CustomerRepository extends JpaRepository<User, Long> {
 
 
     public void deleteUserByAccountId(String accountId);
+    public void deleteUserByUid(Long uid);
 }
