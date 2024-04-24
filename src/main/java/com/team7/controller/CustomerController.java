@@ -72,7 +72,7 @@ public class CustomerController {
 
     }
 
-    @PostMapping("/modify/mbti")
+    @PostMapping("/myInfo/modify/mbti")
     public void updateCustomerMbti(HttpServletRequest request, HttpServletResponse response){
         String customerAccoundId = controllerUtil.getUserNameFromHeader(request);
         User customer = customerService.findUserByAccountId(customerAccoundId).get();
@@ -83,21 +83,27 @@ public class CustomerController {
 
     }
 
-    @PostMapping("/myInfo/modify/email")
-    public void CustomerInfoDTO(HttpServletRequest request, HttpServletResponse response){
-
+    @PostMapping("/myInfo/update")
+    public void updateCustomerInfo(HttpServletRequest request, HttpServletResponse response){
         String customerAccountId = controllerUtil.getUserNameFromHeader(request);
         User user = customerService.findUserByAccountId(customerAccountId).get();
-        user.setEmail(request.getParameter("email"));
-        return;
-
-    }
-
-    @PostMapping("/myInfo/modify/password")
-    public void updateCustomerPassword(HttpServletRequest request, HttpServletResponse response){
-        String customerAccountId = controllerUtil.getUserNameFromHeader(request);
-        User user = customerService.findUserByAccountId(customerAccountId).get();
-        user.setAccountPassword(request.getParameter("password"));
+        String target = request.getHeader("target");
+        String value = request.getParameter("value");
+        if(target.equals("password")){
+            user.setAccountPassword(value);
+        }
+        else if (target.equals("email")){
+            user.setEmail(value);
+        }
+        else if (target.equals("phone")){
+            user.setPhone(value);
+        }
+        else if (target.equals("mbti")){
+            Mbti mbti = mbtiService.findMbtiByMbtiValue(value);
+            user.setMbti(mbti);
+        }
+        else{return;}
+        customerService.save(user);
     }
 }
 

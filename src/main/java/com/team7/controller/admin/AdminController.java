@@ -67,6 +67,10 @@ public class AdminController {
     public ArrayList<User> getCustomers(){
         return customerService.findAllCustomer();
     }
-
-
+//
+//    @PostMapping("/users/user/{uid}/modify")
+//    @RequestBody
+//    public void modifyCustomerInformation(@PathVariable Long uid, ){
+//
+//    }
 }
