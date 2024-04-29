@@ -87,6 +87,7 @@ public class SecurityConfig {
                         .requestMatchers("/myDataInfo/**").permitAll()
                         .requestMatchers("/recommend/mbti/**").permitAll()
                         .requestMatchers("/recommend/member/**").authenticated()
+                        .requestMatchers("/send-slack-message").permitAll()
                         .anyRequest().authenticated());
 
         //AuthenticationManager()와 JWTUtil 인수 전달
