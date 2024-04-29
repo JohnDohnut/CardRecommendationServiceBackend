@@ -4,6 +4,7 @@ package com.team7.db.dto;
 import com.team7.db.model.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class CustomerRegisterDto {
 
     private String firstName;

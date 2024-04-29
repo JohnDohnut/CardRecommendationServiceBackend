@@ -33,16 +33,12 @@
             return authentication.getName();
         }
 
-        @GetMapping("/home")
-        public String getHomePage(HttpServletRequest request, HttpServletResponse response){
-            return "index.html";
-        }
 
         @GetMapping("/role")
-        public String getRole(HttpServletRequest request, HttpServletResponse response){
+        public ArrayList<GrantedAuthority> getRole(HttpServletRequest request, HttpServletResponse response){
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             System.out.println("entered login");
-            return new ArrayList<GrantedAuthority>(authentication.getAuthorities()).get(0).getAuthority();
+            return new ArrayList<GrantedAuthority>(authentication.getAuthorities());
         }
 
         @PostMapping("/register")
@@ -71,7 +67,7 @@
             Blacklist blacklist = new Blacklist(token);
             blacklistRepository.save(blacklist);
             SecurityContextHolder.clearContext();
-            return "loggedout";
+            return SecurityContextHolder.getContext().getAuthentication().getName();
 
 
         }

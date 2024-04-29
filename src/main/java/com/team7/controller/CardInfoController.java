@@ -78,7 +78,6 @@ public class CardInfoController {
     @ResponseBody
     @GetMapping("/mbti/{mbti}")
     public ArrayList<CardDto> getMbtiCards(@PathVariable String mbti, HttpServletResponse response){
-        System.out.println("mbti bitches");
         ArrayList<CardDto> rv;
         try {
             mbti = mbti.toUpperCase();
