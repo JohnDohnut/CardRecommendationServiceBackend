@@ -16,8 +16,12 @@ public class ControllerUtil {
         return token;
     }
     public String getUserNameFromHeader(HttpServletRequest request){
-        String token = request.getHeader("Authorization").split(" ")[1];
-        String customerAccountId = jwtUtil.getUsername(token);
+        String customerAccountId = null;
+        String token = request.getHeader("Authorization");
+        if(token != null){
+            token = token.split(" ")[1];
+            customerAccountId = jwtUtil.getUsername(token);
+        }
         return customerAccountId;
     }
 }

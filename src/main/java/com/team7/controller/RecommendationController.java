@@ -34,27 +34,38 @@ public class RecommendationController {
     private final CardBenefitService cardBenefitService;
     private final ControllerUtil controllerutil;
 
-    @GetMapping("/member/mymbti")
+    @GetMapping("/mymbti")
     public RedirectView recommendByMyMbti(HttpServletRequest request, HttpServletResponse response){
         RedirectView redirectView = new RedirectView();
+        Optional<User> user = customerService
+                .findUserByAccountId(controllerutil.getUserNameFromHeader(request));
 
-        Mbti mbti = customerService
-                .findUserByAccountId(controllerutil.getUserNameFromHeader(request))
-                .get()
-                .getMbti();
-
-        if(mbti == null){
+        if (user.isEmpty()){
+            System.out.println("no user");
             redirectView.setUrl("/cards");
         }
 
         else{
-            redirectView.setUrl("/cards/mbti/" + mbti.getValue().toUpperCase());
+
+            Mbti mbti = user.get().getMbti();
+
+            if(mbti ==  null){
+                System.out.println("mbti empty");
+                redirectView.setUrl("/cards");
+            }
+
+            else{
+                System.out.println("user with mbti");
+                redirectView.setUrl("/cards/mbti/" + mbti.getValue().toUpperCase());
+            }
+
         }
 
         return redirectView;
     }
     @GetMapping("/mbti/{mbti}")
-    public RedirectView recommendByMbti(@PathVariable String mbti){
+    public RedirectView recommendByMbti(@PathVariable String mbti, HttpServletRequest request){
+
         RedirectView redirectView = new RedirectView();
         mbti = mbti.toUpperCase();
         redirectView.setUrl("/cards/mbti/" + mbti);
