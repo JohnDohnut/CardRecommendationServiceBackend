@@ -18,6 +18,7 @@ public class CustomerInfoDTO {
     private String phone;
     private String email;
     private String accountId;
+    private String mbti;
 
     public CustomerInfoDTO(User user){
         this.firstName = user.getFirstName();
@@ -26,6 +27,7 @@ public class CustomerInfoDTO {
         this.phone = user.getPhone();
         this.email = user.getEmail();
         this.accountId = user.getAccountId();
+        this.mbti = user.getMbti().getValue();
     }
 
 }
