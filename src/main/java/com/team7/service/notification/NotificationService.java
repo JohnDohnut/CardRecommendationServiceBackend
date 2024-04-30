@@ -1,11 +1,14 @@
 package com.team7.service.notification;
 
+import com.slack.api.methods.SlackApiException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import com.slack.api.Slack;
+import com.slack.api.methods.response.chat.ChatPostMessageResponse;
+
+import java.io.IOException;
+
 
 @Service
 public class NotificationService {
@@ -23,15 +26,26 @@ public class NotificationService {
     }
 
     public void sendMessage(String message) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setBearerAuth(slackToken);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        headers.setBearerAuth(slackToken);
+//
+//        String body = String.format("{\"channel\":\"%s\",\"text\":\"%s\"}", channelId, message);
+//
+//        HttpEntity<String> request = new HttpEntity<>(body, headers);
+//
 
-        String body = String.format("{\"channel\":\"%s\",\"text\":\"%s\"}", channelId, message);
+        Slack slack = Slack.getInstance();
+        try {
+            ChatPostMessageResponse response = slack.methods(slackToken).chatPostMessage((req->req
+                    .channel(channelId)
+                    .text(message)));
+            System.out.println("Response from Slack: " + response);
 
-        HttpEntity<String> request = new HttpEntity<>(body, headers);
-
-        String response = restTemplate.postForObject("https://slack.com/api/chat.postMessage", request, String.class);
-        System.out.println("Response from Slack: " + response);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (SlackApiException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

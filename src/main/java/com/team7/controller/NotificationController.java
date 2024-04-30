@@ -1,5 +1,6 @@
 package com.team7.controller;
 
+import com.team7.db.dto.SlackMessage;
 import com.team7.service.notification.NotificationService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,8 +15,9 @@ public class NotificationController {
     private NotificationService notificationService;
 
     @PostMapping("/send-slack-message")
-    public String sendSlackMessage(@RequestBody String message) {
-        notificationService.sendMessage(message);
+    public String sendSlackMessage(@RequestBody SlackMessage msg) {
+
+        notificationService.sendMessage(msg.getMessage());
         return "Message sent successfully";
     }
 }
