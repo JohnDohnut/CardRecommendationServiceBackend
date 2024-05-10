@@ -26,14 +26,6 @@ public class NotificationService {
     }
 
     public void sendMessage(String message) {
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        headers.setBearerAuth(slackToken);
-//
-//        String body = String.format("{\"channel\":\"%s\",\"text\":\"%s\"}", channelId, message);
-//
-//        HttpEntity<String> request = new HttpEntity<>(body, headers);
-//
 
         Slack slack = Slack.getInstance();
         try {
